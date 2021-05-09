@@ -1,0 +1,17 @@
+footer {
+  user-select: none;
+  .footer__snsLink {
+    a:active {
+      background-color: $bg__primary--active--color !important;
+    }
+  }
+  .footer__copyright {
+    width: 90%;
+    border-top: thin solid $white;
+  }
+}
+@media (hover: hover) {
+  footer .footer__snsLink a:hover {
+    background-color: $bg__primary--hover--color;
+  }
+}

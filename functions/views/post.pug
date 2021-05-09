@@ -1,0 +1,84 @@
+extends _layout.pug
+
+block sharing
+  meta(property='og:type' content='article')
+
+block head
+  if post.featuredImage
+    -var image = post.featuredImage.replace(/200x200/, '1280x1280')
+  else
+    -var image = blogger.imageUrl
+  -var datePublished = moment(post.public_time * 1000).utcOffset(8).format()
+  if post.update_time
+    -var dateModified = moment(post.update_time * 1000).utcOffset(8).format()
+  else
+    -var dateModified = moment(post.public_time * 1000).utcOffset(8).format()
+  script(type='application/ld+json').
+    [{"@context":"https://schema.org","@type":"SocialMediaPosting","headline":"#{post.title}","image":["#{image}"],"url":"#{path}","description":"#{description}","datePublished":"#{datePublished}","dateModified":"#{dateModified}"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"#{blogger.domain}","name":"#{blogger.author}"}},{"@type":"ListItem","position":2,"item":{"@id":"#{blogger.domain}categories/#{category.path}","name":"#{category.name}"}},{"@type":"ListItem","position":3,"item":{"@id":"#{path}","name":"#{post.title}"}}]},{"@context":"https://schema.org","@type":"Organization","url":"#{blogger.domain}","logo":"#{blogger.domain}organization.png"}]
+  meta(property='fb:app_id' content='3933693596657669')
+  script(src='/__/firebase/7.24.0/firebase-app.js')
+  script(src='/__/firebase/7.24.0/firebase-firestore.js')
+  script(src='/sharded-counter.js')
+
+block pre_scripts
+  #fb-root
+  script(async defer crossorigin='anonymous' src='https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v10.0&appId=3933693596657669&autoLogAppEvents=1' nonce='4o2ZKS4d')
+
+block content
+  #post.container-fluid.container__fixedNavbar--margin
+    .container.pt-sm-4.pb-5
+      #main-content.row
+        article.post__article.col-lg-8.mb-3.mb-lg-0.col--border
+          .card
+            .card-body.pt-3
+              .card-title.mb-3
+                a.d-flex.align-items-center.mb-3(href='/categories/'+category.path)
+                  img.card__title__icon--lg.rounded-circle(src=category.thumbnail||blogger.othersThumbnail alt=category.name)
+                  p.mb-0.ml-2.text-muted=category.name
+                h1.h4.font-weight-bold.mb-2=post.title
+                .d-flex.align-items-center
+                  time.text-muted(datetime=moment(post.public_time * 1000).utcOffset(8).format('YYYY-MM-DD'))=moment(post.public_time * 1000).utcOffset(8).format('LL')
+                  if post.update_time
+                    span.post__updateTime.text-secondary.ml-3(data-toggle='tooltip' data-placement='bottom' title=moment(post.update_time * 1000).utcOffset(8).format('LL')) 已更新
+              .post__content.pt-4
+                !=post.content
+              if post.tagsArray
+                .post__tags.mt-5
+                  -for(var tagsDoc in post.tagsArray)
+                    a.btn.btn-info.text-muted.mr-2.my-1(rel='tag' href='/tags/'+post.tagsArray[tagsDoc])=post.tagsArray[tagsDoc]
+              if postPrev||postNext
+                .form-row
+                  if postPrev
+                    a.post__series.col-6.text-muted.mt-4.py-2(href='/'+category.path+'/'+postPrev.path rel='prev')
+                      small.d-block.mb-1 《 上一篇
+                      span.line-clamp-2=postPrev.title
+                  if postNext
+                    a.post__series.col-6.text-muted.mt-4.py-2.ml-auto(href='/'+category.path+'/'+postNext.path rel='next')
+                      small.d-block.text-right.mb-1 下一篇 》
+                      span.line-clamp-2.text-right=postNext.title
+              .post__donate.mt-3
+                a.d-flex.align-items-center.justify-content-center.border-top.border-bottom.py-2.text-muted(href='/donate')
+                  span.icon--size--lg.icon__donate--black
+                  span.post__donate__text.ml-2 自由樂捐
+          .post__comments.card
+            .card-body
+              .fb__comment.d-flex.align-items-center.mb-2
+                span.fb__comment__title.py-1.px-2 臉書留言
+                span.form__info__icon.icon__info--black(data-toggle='popover' data-placement='auto')
+                  .d-none
+                    .form__info
+                      .d-block.py-1 留言時會自動登入臉書，當其他用戶回覆你時，可於臉書收到通知。
+                      .d-block.py-1.border-top 如果無法留言，請在當前瀏覽器開啟臉書並登入，再回來該頁面，即可自動登入。
+                      .d-block.py-1.border-top 如已登入臉書，仍無法順利留言，請清除 cookie（或瀏覽紀錄），再回來該頁面。
+              .fb-comments(data-href=path data-numposts='5' data-width='100%')
+        #sidebar.col-lg-4
+          .sidebar__inner
+            include partials/_sidebar.pug
+
+block scripts
+  script.
+    var firebaseConfig = { projectId: '#{blogger.projectId}' };
+    firebase.initializeApp(firebaseConfig);
+    var db = firebase.firestore();
+    var visits = new sharded.Counter(db.doc('posts/#{post.objectID}'), 'visits');
+    visits.incrementBy(1);

@@ -1,0 +1,19 @@
+extends _layout.pug
+
+block sharing
+  meta(property='og:type' content='website')
+
+block head
+  meta(name='robots' content='noindex, follow')
+
+block pre_scripts
+
+block content
+  #error.container-fluid.container__fixedNavbar--margin
+    .container.px-4.pt-sm-4.pb-5
+      .h5.mb-0.font-weight-bold.text-center.py-3 message
+      pre.py-4=message
+      .h5.mb-0.font-weight-bold.text-center.py-3 error.status
+      span.py-4=error.status
+      .h5.mb-0.font-weight-bold.text-center.py-3 error.stack
+      pre.py-4 #{error.stack}

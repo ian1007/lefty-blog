@@ -1,0 +1,103 @@
+extends _layout.pug
+
+block sharing
+  meta(property='og:type' content='website')
+
+block head
+  if type==='homepage'
+    script(type='application/ld+json').
+      [{"@context":"https://schema.org","@type":"WebSite","url":"#{blogger.domain}","potentialAction":{"@type":"SearchAction","target":"#{blogger.domain}search?query={search_term_string}","query-input":"required name=search_term_string"}},{"@context":"https://schema.org","@type":"Organization","url":"#{blogger.domain}","logo":"#{blogger.domain}organization.png"}]
+  else if type==='category'
+    script(type='application/ld+json').
+      [{"@context":"https://schema.org","@type":"WebSite","url":"#{blogger.domain}","potentialAction":{"@type":"SearchAction","target":"#{blogger.domain}search?query={search_term_string}","query-input":"required name=search_term_string"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"#{blogger.domain}","name":"#{blogger.author}"}},{"@type":"ListItem","position":2,"item":{"@id":"#{path}","name":"#{category.name}"}}]},{"@context":"https://schema.org","@type":"Organization","url":"#{blogger.domain}","logo":"#{blogger.domain}organization.png"}]
+  else if type==='tag'
+    script(type='application/ld+json').
+      [{"@context":"https://schema.org","@type":"WebSite","url":"#{blogger.domain}","potentialAction":{"@type":"SearchAction","target":"#{blogger.domain}search?query={search_term_string}","query-input":"required name=search_term_string"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"#{blogger.domain}","name":"#{blogger.author}"}},{"@type":"ListItem","position":2,"item":{"@id":"#{path}","name":"#{tag}"}}]},{"@context":"https://schema.org","@type":"Organization","url":"#{blogger.domain}","logo":"#{blogger.domain}organization.png"}]
+  meta(property='fb:app_id' content='3933693596657669')
+
+block pre_scripts
+  #fb-root
+  script(async defer crossorigin='anonymous' src='https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v10.0&appId=3933693596657669&autoLogAppEvents=1' nonce='4o2ZKS4d')
+
+block content
+  #index.container-fluid.container__fixedNavbar--margin
+    include partials/_carousel.pug
+    .container.pb-5
+      #main-content.row
+        main#preview.col-lg-8.mb-3.mb-lg-0.col--border
+          .preview__type.d-flex.align-items-center.py-2.py-sm-3
+            if type==='homepage'
+              span.preview__icon.icon__homepage--black
+              h1.h5.font-weight-normal.ml-2.mb-0 首頁
+            else if type==='category'
+              img.preview__icon.rounded-circle.lazyload(data-src=category.thumbnail||blogger.othersThumbnail)
+              h1.h5.font-weight-normal.ml-2.mb-0=category.name
+            else if type==='tag'
+              span.preview__icon.icon__tags--black
+              h1.h5.font-weight-normal.ml-2.mb-0=tag
+          if postsPublic.length===0
+            .none.d-flex.flex-column.align-items-center.text-info
+              span.h4.mt-3.mb-4 - 還沒有相關的貼文哦 -
+          else
+            -for(var publicDoc in postsPublic)
+              article(class=(postsPublic[publicDoc].featuredImage!=='')?'preview__article':'preview__article--noimage')
+                if postsPublic[publicDoc].category==='其他'
+                  .preview__category.d-flex.align-items-center
+                    img.rounded-circle.lazyload(data-src=blogger.othersThumbnail alt='其他')
+                    p.mb-0.ml-2.text-muted 其他
+                  a.preview__title.stretched-link(href='/others/'+postsPublic[publicDoc].path) 
+                    h2.font-wight-bold.mb-0=postsPublic[publicDoc].title
+                  if postsPublic[publicDoc].description!==''
+                    p.preview__description.mb-0=postsPublic[publicDoc].description
+                  else if postsPublic[publicDoc].descriptionDefault !== ''
+                    p.preview__description.mb-0=postsPublic[publicDoc].descriptionDefault
+                  if postsPublic[publicDoc].featuredImage!==''
+                    img.preview__image.rounded-lg.lazyload(data-src=postsPublic[publicDoc].featuredImage alt=postsPublic[publicDoc].title style='object-fit:cover;')
+                else
+                  -for(var categoriesPublic in categories)
+                    if postsPublic[publicDoc].category===categories[categoriesPublic].id
+                      .preview__category.d-flex.align-items-center
+                        img.rounded-circle.lazyload(data-src=categories[categoriesPublic].thumbnail||blogger.othersThumbnail alt=categories[categoriesPublic].name)
+                        p.mb-0.ml-2.text-muted=categories[categoriesPublic].name
+                      a.preview__title.stretched-link(href='/'+categories[categoriesPublic].path+'/'+postsPublic[publicDoc].path)
+                        h2.font-wight-bold.mb-0=postsPublic[publicDoc].title
+                      if postsPublic[publicDoc].description!==''
+                        p.preview__description.mb-0=postsPublic[publicDoc].description
+                      else if postsPublic[publicDoc].descriptionDefault !== ''
+                        p.preview__description.mb-0=postsPublic[publicDoc].descriptionDefault
+                      if postsPublic[publicDoc].featuredImage!==''
+                        img.preview__image.rounded-lg.lazyload(data-src=postsPublic[publicDoc].featuredImage alt=postsPublic[publicDoc].title style='object-fit:cover;')
+            nav.my-5
+              ul.pagination.justify-content-center.align-items-end
+                li.page-item(class={active: 1 === page.currentPage})
+                  if type==='homepage'
+                    a.page-link(href='/?page=1') 1
+                  else if type==='category'
+                    a.page-link(href='/categories/'+category.path+'?page=1') 1
+                  else if type==='tag'
+                    a.page-link(href='/tags/'+tag+'?page=1') 1
+                if page.pageTotal > 2
+                  if page.currentPage - 2 > 2
+                    span.pagination__ellipsis ...
+                  -for (var i = page.currentPage - 2; i < page.currentPage + 3 ; i++)
+                    if i > 1 && i < page.pageTotal
+                      li.page-item(class={active: i === page.currentPage})
+                        if type==='homepage'
+                          a.page-link(href='/?page='+i)=i
+                        else if type==='category'
+                          a.page-link(href='/categories/'+category.path+'?page='+i)=i
+                        else if type==='tag'
+                          a.page-link(href='/tags/'+tag+'?page='+i)=i
+                  if page.currentPage + 2 < page.pageTotal - 1
+                    span.pagination__ellipsis  ...
+                if page.pageTotal != 1
+                  li.page-item(class={active: page.currentPage === page.pageTotal})
+                    if type==='homepage'
+                      a.page-link(href='/?page='+page.pageTotal)=page.pageTotal
+                    else if type==='category'
+                      a.page-link(href='/categories/'+category.path+'?page='+page.pageTotal)=page.pageTotal
+                    else if type==='tag'
+                      a.page-link(href='/tags/'+tag+'?page='+page.pageTotal)=page.pageTotal
+        #sidebar.col-lg-4
+          .sidebar__inner
+            include partials/_sidebar.pug

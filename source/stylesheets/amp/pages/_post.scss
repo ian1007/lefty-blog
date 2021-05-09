@@ -1,0 +1,232 @@
+.post {
+  .post__title {
+    .post__category {
+      color: var(--neutral-light);
+      width: fit-content;
+    }
+    h1 {
+      line-height: $line-height-lg;
+    }
+    time {
+      color: var(--neutral-light);
+      font-size: $font-size-sm;
+    }
+    .post__author:active {
+      text-decoration: underline;
+    }
+  }
+  .post__tags {
+    a {
+      color: var(--neutral-light);
+      border-radius: 2rem;
+      font-size: $font-size-sm;
+    }
+  }
+  .form-row {
+    // 因為外層沒有空間，所以預設的 margin-left: -5px; 與 margin-right: -5px; 會使版面 overflow
+    margin-left: 0;
+    margin-right: 0;
+    .post__series {
+      color: var(--neutral-light);
+      &:hover {
+        color: var(--neutral-light);
+      }
+      &:active {
+        color: var(--neutral-darkest);
+      }
+    }
+  }
+  .post__donate {
+    background-color: var(--neutral-lighter-bg);
+    a {
+      color: var(--neutral-light);
+      border-top: $border-width solid var(--neutral-lighter);
+      border-bottom: $border-width solid var(--neutral-lighter);
+    }
+    .icon__donate--black {
+      opacity: 0.6;
+    }
+  }
+}
+// 參考 document/builds/integration/content styles
+.post__content {
+  > :not(.image):not(.media) {
+    margin-left: $card-spacer-x;
+    margin-right: $card-spacer-x;
+  }
+  p {
+    margin-bottom: $content--margin;
+  }
+  h2,
+  h3 {
+    font-size: $font-size-base * 1.25;
+    font-weight: $font-weight-bold;
+    margin-bottom: $content--margin--sm;
+  }
+  blockquote {
+    overflow: hidden;
+    padding-right: 1.5em;
+    padding-left: calc(1.5em - 5px);
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: $content--margin;
+    font-style: unset;
+    border-left: 5px double lighten($primary, 15%);
+    :last-child {
+      margin-bottom: 0;
+    }
+  }
+  .image {
+    display: table;
+    clear: both;
+    text-align: center;
+    margin: 0 auto $content--margin auto;
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 75%;
+    amp-img {
+      display: block;
+      margin: 0 auto;
+      min-width: $html--min--width;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: lighten($primary, 40%);
+      &.contain img {
+        object-fit: contain;
+      }
+    }
+    & > figcaption {
+      color: var(--neutral-light);
+      background-color: var(--neutral-lighter-bg);
+      padding: 0.6em;
+      font-size: $font-size-sm;
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      opacity: 0.85;
+    }
+  }
+  a {
+    font-weight: $font-weight-bolder;
+    &:active {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+  }
+  .table {
+    display: flex;
+    margin: 0 auto $content--margin auto;
+    overflow-x: scroll;
+    width: unset;
+    table {
+      display: table;
+      border-spacing: 0;
+      width: 100%;
+      border: unset;
+      th,
+      td {
+        min-width: 2em;
+        padding: 0.4em;
+        border: $border-width solid var(--neutral-lighter);
+        text-align: center;
+      }
+      th {
+        font-weight: normal;
+        background-color: var(--neutral-lighter-bg);
+      }
+    }
+  }
+  hr {
+    margin: 1em 0;
+    height: 0;
+    background: unset;
+    border: 0;
+    border-top: thick solid var(--neutral-lighter);
+  }
+  .media {
+    clear: both;
+    min-width: unset;
+    margin: 0 0 $content--margin 0;
+  }
+  .raw-html-embed {
+    margin: 0 auto $content--margin auto;
+    min-width: unset;
+  }
+}
+@media (hover: hover) {
+  .post {
+    .post__title .post__author:hover {
+      text-decoration: underline;
+    }
+    .post__tags a {
+      &:not(:disabled):hover,
+      &:not(:disabled):active,
+      &:not(:disabled):focus {
+        color: var(--neutral-light);
+      }
+      &:not(:disabled):active:focus {
+        box-shadow: none;
+      }
+    }
+    .form-row .post__series:hover {
+      color: var(--neutral-darkest);
+    }
+    .post__donate:hover,
+    .post__donate a:hover {
+      .icon__donate--black {
+        opacity: 0.9;
+      }
+      .post__donate__text {
+        color: var(--neutral-darkest);
+      }
+    }
+    .post__donate:active,
+    .post__donate a:active {
+      .icon__donate--black {
+        opacity: 0.9;
+      }
+      .post__donate__text {
+        color: var(--neutral-darkest);
+      }
+    }
+  }
+  .post__content a:hover {
+    text-decoration: underline;
+  }
+}
+@media (hover: none) {
+  .post {
+    .post__donate:hover,
+    .post__donate a:hover {
+      .icon__donate--black {
+        opacity: 0.6;
+      }
+      .post__donate__text {
+        color: var(--neutral-light);
+      }
+    }
+    .post__donate:active,
+    .post__donate a:active {
+      .icon__donate--black {
+        opacity: 0.9;
+      }
+      .post__donate__text {
+        color: var(--neutral-darkest);
+      }
+    }
+    .post__tags a {
+      &:not(:disabled):hover,
+      &:not(:disabled):active,
+      &:not(:disabled):focus {
+        color: var(--neutral-light);
+      }
+      &:not(:disabled):active:focus {
+        box-shadow: none;
+      }
+    }
+  }
+}

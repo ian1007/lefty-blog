@@ -1,0 +1,52 @@
+header.navbar.navbar-expand-lg.navbar-light.border-bottom.smart-scroll
+  #navbarCollapse.container
+    button.navbar-toggler.order-lg-1.border-0(type='button' data-toggle='collapse' data-target='#navbarNavAltMarkup')
+      span.navbar__toggler__icon.icon__hamburger--black
+    a.navbar-brand.order-lg-0.mr-0.mr-lg-4.px-4.px-lg-0(href='/admin' title=blogger.author)
+      picture.ratio-box(style='padding-bottom: 30px')
+        source(srcset='/icon/logo.svg' media='(min-width: 992px)')
+        img(src='/icon/favicon.svg' alt=blogger.author)
+    button.navbar-toggler.order-lg-2.border-0(type='button' data-toggle='collapse' data-target='#navbarNavSearchBar')
+      span.navbar__toggler__icon.icon__search--black
+    #navbarNavSearchBar.collapse.navbar-collapse(data-parent='#navbarCollapse')
+      form#form__search.py-3.px-4.py-lg-0.px-lg-0(action='/admin/search')
+        input#form__searching.form-control.py-0(type='search' name='query' placeholder='找找看...' autocomplete='off' value=searching||'')
+    nav#navbarNavAltMarkup.collapse.navbar-collapse.ml-auto.pl-lg-2(data-parent='#navbarCollapse')
+      ul.navbar-nav
+        li.nav-item
+          a.nav-link.d-flex.align-items-center.rounded-sm(href='/admin/about-me' rel='author')
+            span.navbar__icon.icon__aboutme--black.mx-4.mx-lg-2
+            span.mr-lg-2 關於我
+        li.nav-item
+          a.nav-link.d-flex.align-items-center.rounded-sm(href='/admin/categories')
+            span.navbar__icon.icon__categories--black.mx-4.mx-lg-2
+            span.mr-lg-2 所有主題
+        li.nav-item
+          a.nav-link.d-flex.align-items-center.rounded-sm(href='/admin/donate')
+            span.navbar__icon.icon__donate--black.mx-4.mx-lg-2
+            span.mr-lg-2 自由樂捐
+        li.nav-item.dropdown
+          button.nav-link.align-items-center.rounded-sm.dropdown-toggle.border-0.d-none.d-lg-flex(type='button' data-toggle='dropdown')
+            span.navbar__icon.icon__admin--black.mx-4.mx-lg-2
+          .dropdown-menu.dropdown-menu-right.p-0.p-lg-2.border-0.d-block.d-lg-none
+            .dropdown-divider.d-lg-none
+            a.nav-link.d-flex.align-items-center.rounded-sm.dropdown-item(href='/admin/post/create')
+              span.navbar__icon.icon__postCreate--black.mx-4.mx-lg-2
+              span.mr-lg-2 新增貼文
+            a.nav-link.d-flex.align-items-center.rounded-sm.dropdown-item(href='/admin/category/create')
+              span.navbar__icon.icon__categoryCreate--black.mx-4.mx-lg-2
+              span.mr-lg-2 新增主題
+            .dropdown-divider
+            button.nav-link.d-flex.align-items-center.rounded-sm.dropdown-item(type='button' data-toggle='modal' data-target='#logout')
+              span.navbar__icon.icon__logout--black.mx-4.mx-lg-2
+              span.mr-lg-2 登出
+#logout.modal.fade(tabindex='-1')
+  .modal-dialog
+    .modal-content
+      .modal-header.border-bottom-0
+        span.h5.modal-title 確定登出？
+        button.close(type='button' data-dismiss='modal')
+          span &times;
+      .modal-footer
+        button.btn.btn-info.text-muted(type='button' data-dismiss='modal') 取消
+        button#logoutConfirm.btn.btn-danger(type='button' data-dismiss='modal') 確定

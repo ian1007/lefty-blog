@@ -1,0 +1,28 @@
+footer {
+  user-select: none;
+  background-color: var(--primary-lightest);
+  border-top: $border-width solid var(--neutral-lighter);
+  .footer__snsLink {
+    width: 90%;
+    a:active {
+      background-color: var(--primary-darkest-active);
+    }
+  }
+  .footer__copyright {
+    width: 90%;
+    border-top: thin solid var(--neutral-lighter);
+    a:hover {
+      color: $white;
+    }
+  }
+}
+@media (hover: hover) {
+  footer .footer__snsLink a {
+    &:hover {
+      background-color: var(--primary-darkest-hover);
+    }
+    &:active {
+      background-color: var(--primary-darkest-active);
+    }
+  }
+}

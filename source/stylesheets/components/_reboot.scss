@@ -1,0 +1,48 @@
+/* Bootstrap 的 reboot 補充 */
+html {
+  // 減少鋸齒，更平順
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  // 錨點平滑跳轉，safari 不支援
+  scroll-behavior: smooth;
+  // html & body 要同時設才能 disable 水平 scrollbar
+  overflow-x: hidden;
+  // 只允許進行滾動和持續縮放操作，禁用其他非標準手勢，例如雙擊以進行縮放。
+  touch-action: manipulation;
+}
+body {
+  overflow-x: hidden;
+  letter-spacing: $body--letter--spacing;
+}
+button {
+  letter-spacing: $body--letter--spacing;
+  &:active,
+  &:not(:active):focus {
+    outline: none;
+  }
+}
+ol,
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+::selection {
+  background-color: lighten($primary, 10%);
+  color: $white;
+}
+// anchor# 的 offset
+.anchor:target::before {
+  content: "";
+  display: block;
+  height: calc(61px + 1.5rem); // navbar + border-width + 1.5rem
+  margin-top: calc(-61px - 1.5rem);
+  visibility: hidden;
+}
+@media (min-width: 576px) {
+  .h4 {
+    font-size: $font-size-base * 1.5 !important;
+  }
+  .h5 {
+    font-size: $font-size-base * 1.25 !important;
+  }
+}

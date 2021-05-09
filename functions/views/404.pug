@@ -1,0 +1,18 @@
+extends _layout.pug
+
+block sharing
+  meta(property='og:type' content='website')
+
+block head
+  meta(name='robots' content='noindex, follow')
+
+block pre_scripts
+
+block content
+  #notFound.container-fluid.container__fixedNavbar--margin
+    .container.px-4.pt-4.pb-5
+      .notFound.mx-auto.mt-4.mb-5
+      .d-flex.flex-column.align-items-center.pb-4
+        span.h4.font-weight-bold.text-center.mb-5 你要找的頁面跑到外太空了！
+        span.text-center.mb-4 天涯何處無芳草，換個地方探索吧！
+        a.btn.btn-secondary(href='/') 回首頁

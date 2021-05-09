@@ -1,0 +1,94 @@
+extends _admin_layout.pug
+
+block sharing
+  meta(property='og:type' content='article')
+
+block head
+  meta(property='fb:app_id' content='3933693596657669')
+
+block pre_scripts
+  #fb-root
+  script(async defer crossorigin='anonymous' src='https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v10.0&appId=3933693596657669&autoLogAppEvents=1' nonce='4o2ZKS4d')
+
+block content
+  #post.container-fluid.container__fixedNavbar--margin
+    .container.pt-sm-4.pb-5
+      #main-content.row
+        article.post__article.col-lg-8.mb-3.mb-lg-0.col--border
+          .card
+            .card-body.pt-3
+              .card-title.mb-3
+                .d-flex.justify-content-between.align-items-center.mb-3
+                  a.d-flex.align-items-center(href='/admin/categories/'+category.path)
+                    img.card__title__icon--lg.rounded-circle(src=category.thumbnail||blogger.othersThumbnail alt=category.name)
+                    p.mb-0.ml-2.text-muted=category.name
+                  button.btn__more.icon__more--gray(type='button' data-toggle='popover' data-placement='bottom' data-id=post.objectID data-path=post.path)
+                h1.h4.font-weight-bold.mb-2=post.title
+                .d-flex.align-items-center.justify-content-between.flex-wrap
+                  .d-flex.mr-4
+                    if post.status==='public'
+                      time.text-muted(datetime=moment(post.public_time * 1000).utcOffset(8).format('YYYY-MM-DD'))=moment(post.public_time * 1000).utcOffset(8).format('LL')
+                    else
+                      time.text-muted(datetime=moment(post.create_time * 1000).utcOffset(8).format('YYYY-MM-DD'))=moment(post.create_time * 1000).utcOffset(8).format('LL')
+                    if post.update_time
+                      span.post__updateTime.text-secondary.ml-3(data-toggle='tooltip' data-placement='bottom' title=moment(post.update_time * 1000).utcOffset(8).format('LL')) 已更新
+                    if post.status==='draft'
+                      span.post__status__icon.icon__private--gray.ml-3(data-toggle='tooltip' data-placement='bottom' title='未公開')
+                  if post.visits
+                    span.post__visits.d-block.text-muted 觀看次數：
+                      =post.visits
+                  else
+                    span.post__visits.d-block.text-muted 觀看次數：0
+              .post__content.pt-4
+                !=post.content
+              if post.tagsArray
+                .post__tags.mt-5
+                  -for(var tagsDoc in post.tagsArray)
+                    a.btn.btn-info.text-muted.mr-2.my-1(rel='tag' href='/admin/tags/'+post.tagsArray[tagsDoc])=post.tagsArray[tagsDoc]
+              if postPrev||postNext
+                .form-row
+                  if postPrev
+                    a.post__series.col-6.text-muted.mt-4.py-2(href='/admin/'+category.path+'/'+postPrev.path rel='prev')
+                      small.d-block.mb-1 《 上一篇
+                      span.line-clamp-2=postPrev.title
+                  if postNext
+                    a.post__series.col-6.text-muted.mt-4.py-2.ml-auto(href='/admin/'+category.path+'/'+postNext.path rel='next')
+                      small.d-block.text-right.mb-1 下一篇 》
+                      span.line-clamp-2.text-right=postNext.title
+              .post__donate.mt-3
+                a.d-flex.align-items-center.justify-content-center.border-top.border-bottom.py-2.text-muted(href='/admin/donate')
+                  span.icon--size--lg.icon__donate--black
+                  span.post__donate__text.ml-2 自由樂捐
+          .post__comments.card
+            .card-body
+              .fb__comment.d-flex.align-items-center
+                span.fb__comment__title.py-1.px-2 臉書留言
+                span.form__info__icon.icon__info--black(data-toggle='popover' data-placement='auto')
+                  .d-none
+                    .form__info
+                      .d-block.py-1 留言時會自動登入臉書，當其他用戶回覆你時，可於臉書收到通知。
+                      .d-block.py-1.border-top 如果無法留言，請在當前瀏覽器開啟臉書並登入，再回來該頁面，即可自動登入。
+                      .d-block.py-1.border-top 如已登入臉書，仍無法順利留言，請清除 cookie（或瀏覽紀錄），再回來該頁面。
+              .fb-comments(data-href=path data-numposts='5' data-width='100%')
+        #sidebar.col-lg-4
+          .sidebar__inner
+            include partials/_admin_sidebar.pug
+    #post__more.d-none
+      a.more__option.d-flex.align-items-center(href='#')
+        span.more__option__icon.icon__edit--gray
+        span.more__option__text 編輯
+      button.more__option.d-flex.align-items-center(type='button' data-toggle='modal' data-target='#postDelete')
+        span.more__option__icon.icon__delete--gray
+        span.more__option__text 刪除
+    #postDelete.modal.fade(tabindex='-1')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            span.h5.modal-title 確定刪除此貼文
+            button.close(type='button' data-dismiss='modal')
+              span &times;
+          .modal-body
+            span 注意，一旦刪除貼文，即無法恢復！確定刪除的話，請點選「確定」。
+          .modal-footer
+            button.btn.btn-info.text-muted(type='button' data-dismiss='modal') 取消
+            button#deleteConfirm.btn.btn-danger(type='button' data-dismiss='modal') 確定

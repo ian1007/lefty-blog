@@ -1,0 +1,11 @@
+.form-control {
+  background-color: var(--neutral-lightest-form);
+  color: var(--neutral-darkest);
+  border: $input-border-width solid var(--neutral-lighter);
+  &:focus {
+    background-color: var(--neutral-lightest-form);
+    color: var(--neutral-darkest);
+    border-color: var(--primary-input-focus-border);
+    box-shadow: var(--primary-input-focus-box-shadow);
+  }
+}

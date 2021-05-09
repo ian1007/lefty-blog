@@ -1,0 +1,137 @@
+extends _admin_layout.pug
+
+block sharing
+  meta(property='og:type' content='website')
+
+block head
+  meta(property='fb:app_id' content='3933693596657669')
+
+block pre_scripts
+  #fb-root
+  script(async defer crossorigin='anonymous' src='https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v10.0&appId=3933693596657669&autoLogAppEvents=1' nonce='5Xxm384h')
+
+block content
+  #index.container-fluid.container__fixedNavbar--margin
+    include partials/_admin_carousel.pug
+    .container.pb-5
+      #main-content.row
+        main#preview.tab-content.col-lg-8.mb-3.mb-lg-0.col--border
+          .d-flex.align-items-center
+            .preview__type.d-flex.align-items-center.py-2.py-sm-3
+              span.preview__icon.icon__searchresult--black
+              if searching
+                span.h5.font-weight-normal.ml-2.mb-0 「
+                  =searching
+                  | 」的搜尋結果
+              else
+                span.h5.font-weight-normal.ml-2.mb-0 搜尋
+            #status.btn-group.list-group.flex-row.ml-auto.mr-4.mr-sm-0
+              a.btn.btn-outline-info.list-group-item.active(data-toggle='list' href='#public') 公開
+              a.btn.btn-outline-info.list-group-item(data-toggle='list' href='#draft') 草稿
+          #public.tab-pane.fade.show.active
+            if postsPublic.length===0
+              .none.d-flex.flex-column.align-items-center.text-info
+                span.h4.mt-3.mb-4 - 還沒有相關的貼文哦 -
+            else
+              -for(var publicDoc in postsPublic)
+                article(class=(postsPublic[publicDoc].featuredImage!=='')?'preview__article':'preview__article--noimage' id=postsPublic[publicDoc].objectID)
+                  if postsPublic[publicDoc].category==='其他'
+                    .preview__category.d-flex.align-items-center
+                      img.rounded-circle.lazyload(data-src=blogger.othersThumbnail alt='其他')
+                      p.mb-0.ml-2.text-muted 其他
+                    a.preview__title.stretched-link(href='/admin/others/'+postsPublic[publicDoc].path)
+                      h2.font-wight-bold.mb-0!=postsPublic[publicDoc]._highlightResult.title.value
+                    if postsPublic[publicDoc].description!==''
+                      p.preview__description.mb-0!=postsPublic[publicDoc]._highlightResult.description.value
+                    else if postsPublic[publicDoc].descriptionDefault !== ''
+                      p.preview__description.mb-0!=postsPublic[publicDoc]._highlightResult.descriptionDefault.value
+                    if postsPublic[publicDoc].featuredImage!==''
+                      img.preview__image.rounded-lg.lazyload(data-src=postsPublic[publicDoc].featuredImage alt=postsPublic[publicDoc].title style='object-fit:cover;')
+                  else
+                    -for(var categoriesPublic in categories)
+                      if postsPublic[publicDoc].category===categories[categoriesPublic].id
+                        .preview__category.d-flex.align-items-center
+                          img.rounded-circle.lazyload(data-src=categories[categoriesPublic].thumbnail||blogger.othersThumbnail alt=categories[categoriesPublic].name)
+                          p.mb-0.ml-2.text-muted=categories[categoriesPublic].name
+                        a.preview__title.stretched-link(href='/admin/'+categories[categoriesPublic].path+'/'+postsPublic[publicDoc].path)
+                          h2.font-wight-bold.mb-0!=postsPublic[publicDoc]._highlightResult.title.value
+                        if postsPublic[publicDoc].description!==''
+                          p.preview__description.mb-0!=postsPublic[publicDoc]._highlightResult.description.value
+                        else if postsPublic[publicDoc].descriptionDefault !== ''
+                          p.preview__description.mb-0!=postsPublic[publicDoc]._highlightResult.descriptionDefault.value
+                        if postsPublic[publicDoc].featuredImage!==''
+                          img.preview__image.rounded-lg.lazyload(data-src=postsPublic[publicDoc].featuredImage alt=postsPublic[publicDoc].title style='object-fit:cover;')
+                  button.btn__more.icon__more--gray(type='button' data-toggle='popover' data-placement='left' data-id=postsPublic[publicDoc].objectID data-path=postsPublic[publicDoc].path)
+              nav.my-5
+                ul.pagination.justify-content-center.align-items-end
+                  li.page-item(class={active: 1 === page.currentPage})
+                    a.page-link(href='/admin/search?query='+searching+'&page=1') 1
+                  if page.pageTotal > 2
+                    if page.currentPage - 2 > 2
+                      span.pagination__ellipsis ...
+                    -for (var i = page.currentPage - 2; i < page.currentPage + 3 ; i++)
+                      if i > 1 && i < page.pageTotal
+                        li.page-item(class={active: i === page.currentPage})
+                          a.page-link(href='/admin/search?query='+searching+'&page='+i)=i
+                    if page.currentPage + 2 < page.pageTotal - 1
+                      span.pagination__ellipsis  ...
+                  if page.pageTotal != 1
+                    li.page-item(class={active: page.currentPage === page.pageTotal})
+                      a.page-link(href='/admin/search?query='+searching+'&page='+page.pageTotal)=page.pageTotal
+          #draft.tab-pane.fade
+            if postsDraft.length==0
+              .none.d-flex.flex-column.align-items-center.text-info
+                span.h4.mt-3.mb-4 - 還沒有相關的貼文哦 -
+            else
+              -for(var draftDoc in postsDraft)
+                article(class=(postsDraft[draftDoc].featuredImage!=='')?'preview__article':'preview__article--noimage' id=postsDraft[draftDoc].objectID)
+                  if postsDraft[draftDoc].category==='其他'
+                    .preview__category.d-flex.align-items-center
+                      img.rounded-circle.lazyload(data-src=blogger.othersThumbnail alt='其他')
+                      p.mb-0.ml-2.text-muted 其他
+                    a.preview__title.stretched-link(href='/admin/others/'+postsDraft[draftDoc].path)
+                      h2.font-wight-bold.mb-0!=postsDraft[draftDoc]._highlightResult.title.value
+                    if postsDraft[draftDoc].description!==''
+                      p.preview__description.mb-0!=postsDraft[draftDoc]._highlightResult.description.value
+                    else if postsDraft[draftDoc].descriptionDefault !== ''
+                      p.preview__description.mb-0!=postsDraft[draftDoc]._highlightResult.descriptionDefault.value
+                    if postsDraft[draftDoc].featuredImage!==''
+                      img.preview__image.rounded-lg.lazyload(data-src=postsDraft[draftDoc].featuredImage alt=postsDraft[draftDoc].title style='object-fit:cover;')
+                  else
+                    -for(var categoriesDraft in categories)
+                      if postsDraft[draftDoc].category===categories[categoriesDraft].id
+                        .preview__category.d-flex.align-items-center
+                          img.rounded-circle.lazyload(data-src=categories[categoriesDraft].thumbnail||blogger.othersThumbnail alt=categories[categoriesDraft].name)
+                          p.mb-0.ml-2.text-muted=categories[categoriesDraft].name
+                        a.preview__title.stretched-link(href='/admin/'+categories[categoriesDraft].path+'/'+postsDraft[draftDoc].path)
+                          h2.font-wight-bold.mb-0!=postsDraft[draftDoc]._highlightResult.title.value
+                        if postsDraft[draftDoc].description!==''
+                          p.preview__description.mb-0!=postsDraft[draftDoc]._highlightResult.description.value
+                        else if postsDraft[draftDoc].descriptionDefault !== ''
+                          p.preview__description.mb-0!=postsDraft[draftDoc]._highlightResult.descriptionDefault.value
+                        if postsDraft[draftDoc].featuredImage!==''
+                          img.preview__image.rounded-lg.lazyload(data-src=postsDraft[draftDoc].featuredImage alt=postsDraft[draftDoc].title style='object-fit:cover;')
+                  button.btn__more.icon__more--gray(type='button' data-toggle='popover' data-placement='left' data-id=postsDraft[draftDoc].objectID data-path=postsDraft[draftDoc].path)              
+        #sidebar.col-lg-4
+          .sidebar__inner
+            include partials/_admin_sidebar.pug
+    #preview__more.d-none
+      a.more__option.d-flex.align-items-center(href='#')
+        span.more__option__icon.icon__edit--gray
+        span.more__option__text 編輯
+      button.more__option.d-flex.align-items-center(type='button' data-toggle='modal' data-target='#previewDelete')
+        span.more__option__icon.icon__delete--gray
+        span.more__option__text 刪除
+    #previewDelete.modal.fade(tabindex='-1')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            span.h5.modal-title 確定刪除此貼文
+            button.close(type='button' data-dismiss='modal')
+              span &times;
+          .modal-body
+            span.d-block.mb-3 注意，一旦刪除貼文，即無法恢復！
+            span.d-block 確定刪除的話，請點選「確定」。
+          .modal-footer
+            button.btn.btn-info.text-muted(type='button' data-dismiss='modal') 取消
+            button#deleteConfirm.btn.btn-danger(type='button' data-dismiss='modal') 確定

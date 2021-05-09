@@ -1,0 +1,39 @@
+#postEditor {
+  #postEditor__content {
+    #title {
+      overflow: hidden;
+      resize: none;
+    }
+    // 編輯器一開始的高度
+    .ck-content.ck-editor__editable {
+      min-height: 300px !important;
+    }
+  }
+  #sidebar {
+    #postEditor__categories {
+      .card-body {
+        label {
+          width: 100%;
+          padding: $card-spacer-y $card-spacer-x;
+          cursor: pointer;
+          user-select: none;
+        }
+        input:checked + label {
+          background-color: $bg__light--active--color;
+        }
+      }
+    }
+    #description {
+      overflow: hidden;
+      resize: none;
+    }
+    .btn-group-toggle label.active.focus {
+      box-shadow: none;
+    }
+  }
+}
+@media (hover: hover) {
+  #postEditor #sidebar #postEditor__categories .card-body label:hover {
+    background-color: $bg__light--hover--color;
+  }
+}

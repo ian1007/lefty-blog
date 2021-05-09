@@ -1,0 +1,36 @@
+.popover {
+  box-shadow: $popover-box-shadow;
+  .popover-body {
+    border-radius: inherit;
+    letter-spacing: $body--letter--spacing;
+    .form__info {
+      font-size: $font-size-sm;
+      padding: 0 $spacer/2;
+    }
+    .more__option {
+      width: 100%;
+      padding: $spacer/2;
+      border: 0;
+      border-radius: inherit;
+      background-color: $popover-bg;
+      color: $popover-body-color;
+      font-weight: 500;
+      &:active {
+        background-color: $bg__light--active--color !important;
+      }
+      .more__option__icon {
+        @include icon($popover-font-size, $popover-font-size, $popover-font-size, $popover-font-size, center center, no-repeat, cover);
+        margin-right: $spacer;
+      }
+      .more__option__text {
+        user-select: none;
+        margin-right: 4rem;
+      }
+    }
+  }
+}
+@media (hover: hover) {
+  .popover .popover-body .more__option:hover {
+    background-color: $bg__light--hover--color;
+  }
+}

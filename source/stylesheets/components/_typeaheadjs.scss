@@ -1,0 +1,36 @@
+span.twitter-typeahead {
+  flex-grow: 1;
+  position: initial !important; // 覆蓋 typeaheadjs 加上的 position，讓 tt-menu 跟的是外層的 div
+  .tt-input {
+    width: 100%;
+    color: $input-color;
+  }
+  .tt-menu {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    margin-top: $input-btn-focus-width;
+    padding: $dropdown-padding-y;
+    border-radius: $input-border-radius;
+    border: $border-width solid $border-color;
+    box-shadow: $box-shadow-sm;
+    z-index: $zindex-dropdown;
+    background-color: $dropdown-bg;
+    cursor: default;
+    .tt-suggestion {
+      display: block;
+      padding: $input-padding-y $input-padding-x;
+      border-radius: $input-border-radius;
+      cursor: pointer;
+      &:focus,
+      &.tt-cursor {
+        background-color: $bg__light--hover--color;
+      }
+    }
+  }
+}
+@media (hover: hover) {
+  span.twitter-typeahead .tt-menu .tt-suggestion:hover {
+    background-color: $bg__light--hover--color;
+  }
+}

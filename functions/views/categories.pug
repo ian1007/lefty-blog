@@ -1,0 +1,23 @@
+extends _layout.pug
+
+block sharing
+  meta(property='og:type' content='website')
+
+block head
+  script(type='application/ld+json').
+    [{"@context":"https://schema.org","@type":"WebSite","url":"#{blogger.domain}","potentialAction":{"@type":"SearchAction","target":"#{blogger.domain}search?query={search_term_string}","query-input":"required name=search_term_string"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"#{blogger.domain}","name":"#{blogger.author}"}},{"@type":"ListItem","position":2,"item":{"@id":"#{path}","name":"所有主題"}}]},{"@context":"https://schema.org","@type":"Organization","url":"#{blogger.domain}","logo":"#{blogger.domain}organization.png"}]
+
+block pre_scripts
+
+block content
+  main#categories.container-fluid.container__fixedNavbar--margin
+    .container.py-5
+      -for(let categoryDoc in categories)
+        a.d-flex.flex-column.align-items-center.p-4.hover--shadow.rounded-sm(href='/categories/'+categories[categoryDoc].path)
+          img.categories__icon.rounded-circle.mb-3.lazyload(data-src=categories[categoryDoc].thumbnail||blogger.othersThumbnail alt=categories[categoryDoc].name)
+          h1.categories__name.h5=categories[categoryDoc].name
+          p.categories__description.text-center.text-muted.mb-0=categories[categoryDoc].description
+      a.d-flex.flex-column.align-items-center.p-4.hover--shadow.rounded-sm(href='/categories/others')
+        img.categories__icon.rounded-circle.mb-3.lazyload(data-src=blogger.othersThumbnail alt='其他')
+        h1.categories__name.h5 其他
+        p.categories__description.text-center.text-muted.mb-0 沒有分類的貼文

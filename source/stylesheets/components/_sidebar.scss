@@ -1,0 +1,121 @@
+#sidebar {
+  .sidebar__profile {
+    img {
+      border: medium solid lighten($primary, 15%);
+    }
+    button {
+      background-color: inherit;
+      color: $body-color;
+      cursor: default;
+      .collapse.show,
+      .collapsing {
+        display: flex;
+        flex-direction: column;
+        span.text-muted {
+          font-size: $font-size-sm;
+          margin-left: calc(1.5rem + 1rem); // 左側 icon + margin
+        }
+      }
+      p {
+        letter-spacing: 0px;
+      }
+    }
+  }
+  .sidebar__youtube {
+    a.btn {
+      width: fit-content;
+    }
+  }
+  .sidebar__facebook {
+    #fb-container {
+      background-color: $sidebar__card__content__bg--color;
+    }
+  }
+  .sidebar__instagram {
+    .instafeed__container {
+      background-color: $sidebar__card__content__bg--color;
+      position: relative;
+      padding-bottom: 100%;
+      #instafeed {
+        position: absolute;
+        a {
+          position: relative;
+          display: inline-block;
+          width: 48%;
+          margin: 1%;
+          &:hover::after {
+            content: attr(data-caption);
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 1%;
+            max-height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            background-color: hsla(0, 100%, 100%, 0.8);
+            text-align: center;
+            font-size: 0.8rem;
+            color: black;
+          }
+          img {
+            width: 100%;
+          }
+        }
+      }
+    }
+    a.btn {
+      width: fit-content;
+    }
+  }
+  .sidebar__categories,
+  .sidebar__donate {
+    a {
+      color: $body-color;
+      user-select: none;
+      &:active {
+        background-color: $bg__light--active--color !important;
+      }
+    }
+  }
+  .sidebar__subscribe {
+    .subscribe__description {
+      padding: 0.75rem 1rem;
+      border: medium dashed lighten($primary, 35%);
+      font-weight: 300;
+      ul li {
+        border-bottom: thin dashed darken($primary, 15%);
+        color: darken($primary, 15%);
+      }
+      span.h5 {
+        font-weight: inherit;
+        color: darken($primary, 15%);
+      }
+    }
+    button.btn {
+      width: fit-content;
+    }
+  }
+}
+@media (hover: hover) {
+  #sidebar {
+    .sidebar__profile a:hover {
+      text-decoration: underline;
+    }
+    .sidebar__categories,
+    .sidebar__donate {
+      a:hover {
+        background-color: $bg__light--hover--color;
+      }
+    }
+  }
+}
+// sticky-sidebar.js document 推薦加的
+.sidebar {
+  will-change: min-height;
+}
+.sidebar__inner {
+  transform: translate(0, 0); /* For browsers don't support translate3d. */
+  transform: translate3d(0, 0, 0);
+  will-change: position, transform;
+}

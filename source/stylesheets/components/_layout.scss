@@ -1,0 +1,41 @@
+html {
+  min-width: $html--min--width;
+  body {
+    // Bootstrap 會在 modal 時將 body 上 padding-right 導致頁面左移
+    padding-right: 0px !important;
+    .navbar {
+      // Bootstrap 會在 modal 時將 body 上 padding-right 導致頁面左移
+      padding-right: 0px !important;
+      .container {
+        min-width: $html--min--width;
+      }
+    }
+    /* 覆蓋 Bootstrap 的 grid */
+    .container {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .container-fluid {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .container__fixedNavbar--margin {
+      margin-top: $navbar--max--height;
+    }
+    @include footer-bottom;
+  }
+}
+@media (min-width: 576px) {
+  html body .container__fixedNavbar--margin {
+    font-size: $font-size-base * 1.0625;
+  }
+}
+@media (min-width: 992px) {
+  html body .container__fixedNavbar--margin {
+    font-size: $font-size-base * 1.125;
+  }
+  // 兩欄時中間的線
+  .col--border {
+    border-right: $border-width solid $border-color;
+  }
+}

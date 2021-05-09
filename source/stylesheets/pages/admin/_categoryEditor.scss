@@ -1,0 +1,149 @@
+#categoryEditor {
+  #categoryEditor__icon {
+    #img-crop {
+      // display 要寫在這裡是因為用 d-* 在 html 時會是 important，但在切換上傳狀態時需要隱藏等等，會無法覆蓋
+      // 由於 croppie.js 的演算法，這裡只要外框有 border，那就要用 box-sizing: content-box;
+      // label 的 border-radius 不能在 html，因為 croppie.js 會覆蓋掉
+      #upload {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        img {
+          width: $cr__boundary--w;
+          height: $cr__boundary--h;
+          border: $cr--border;
+          box-sizing: content-box;
+          z-index: 0;
+        }
+        label#filedrag {
+          margin-bottom: 0;
+          position: absolute;
+          width: $cr__boundary--w;
+          height: $cr__boundary--h;
+          z-index: 1;
+          overflow: hidden;
+          border-radius: 50%;
+          cursor: pointer;
+          .image-wrapper {
+            position: absolute;
+            bottom: -30%;
+            @include icon(100%, 30%, 100%, 30%, center center, no-repeat, 20% auto);
+            background-color: rgba(0, 0, 0, 0.2);
+            transition: $transition-base;
+          }
+        }
+      }
+      #crop {
+        display: none;
+        align-items: center;
+        width: 100%;
+        .croppie-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+          .cr-boundary {
+            position: relative;
+            border: $cr--border;
+            box-sizing: content-box;
+            border-radius: $border-radius-sm;
+            overflow: hidden;
+            z-index: 1;
+            .cr-image {
+              max-width: none;
+              max-height: none;
+              z-index: -1;
+            }
+            .cr-viewport {
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              left: 0;
+              right: 0;
+              margin: auto;
+              border: $cr__viewport--border;
+              box-shadow: $cr__viewport--boxShadow;
+              z-index: 0;
+            }
+            .cr-vp-circle {
+              border-radius: 50%;
+            }
+            .cr-overlay {
+              position: absolute;
+              z-index: 1;
+              touch-action: none;
+              cursor: move;
+            }
+          }
+          .cr-slider-wrap {
+            display: flex;
+            position: absolute;
+            top: 100%;
+            width: $cr__boundary--w;
+            height: 2rem;
+            transform: translateY(30%);
+            .cr-slider {
+              width: $cr__boundary--w;
+              background-color: transparent;
+              -webkit-appearance: none;
+              &::-webkit-slider-runnable-track {
+                width: $cr__boundary--w;
+                height: 4px;
+                border-radius: 1rem;
+                background-color: $cr__sliderTrack--bg--color;
+              }
+              &::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                width: 16px;
+                height: 16px;
+                margin-top: -6px;
+                border: $cr__sliderThumb--border;
+                background-color: $cr__sliderThumb--bg--color;
+                border-radius: 50%;
+                transform: scale(1);
+                transition: $transition-base;
+              }
+              &:focus {
+                outline: none;
+              }
+            }
+          }
+        }
+      }
+      #result {
+        display: none;
+        justify-content: center;
+        position: relative;
+        img {
+          width: $cr__boundary--w;
+          height: $cr__boundary--h;
+          border: $cr--border;
+          box-sizing: content-box;
+        }
+        #close {
+          position: absolute;
+          top: 0;
+          right: 0;
+          transform: translate(50%, -50%);
+        }
+      }
+    }
+  }
+  #sidebar {
+    #description {
+      overflow: hidden;
+      resize: none;
+    }
+  }
+}
+@media (hover: hover) {
+  #categoryEditor #categoryEditor__icon #img-crop {
+    #upload:hover label#filedrag .image-wrapper {
+      bottom: 0;
+    }
+    #crop .croppie-container .cr-slider-wrap .cr-slider:hover::-webkit-slider-thumb {
+      transform: scale(1.25);
+    }
+  }
+}

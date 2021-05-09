@@ -1,0 +1,36 @@
+extends _admin_layout.pug
+
+block sharing
+  meta(property='og:type' content='website')
+
+block head
+
+block pre_scripts
+
+block content
+  main#donate.container-fluid.container__fixedNavbar--margin
+    .donate__quotes.py-5
+      .container.p-4
+        .specialQuotes
+          h1.h5.text-muted 我喜歡乾淨沒有廣告的網頁，如果你喜歡我的內容，歡迎透過小額贊助支持我持續創作，謝謝～
+    .donate__items.py-5
+      .container.p-4
+        .d-flex.flex-column.align-items-center.flex-lg-row.justify-content-lg-around
+          .d-flex.flex-lg-column.align-items-lg-center.mb-5
+            img.d-block.mr-4.mr-lg-0.mb-lg-4.lazyload(data-src='/donate/donate-cheering.png' alt='幫我加個油')
+            .d-flex.flex-column.flex-sm-row.flex-lg-column.justify-content-center.align-items-center
+              p.mb-sm-0.mb-lg-3.mx-3.text-center 幫我加個油
+              a.btn.btn-outline-secondary(href='https://cart.cashier.ecpay.com.tw/qp/msn0' target='_blank' rel='nofollow noreferrer noopener') NT$200
+          .d-flex.flex-lg-column.align-items-lg-center.mb-5
+            img.d-block.mr-4.mr-lg-0.mb-lg-4.lazyload(data-src='/donate/donate-steak.png' alt='請我吃牛排')
+            .d-flex.flex-column.flex-sm-row.flex-lg-column.justify-content-center.align-items-center
+              p.mb-sm-0.mb-lg-3.mx-3.text-center 請我吃牛排
+              a.btn.btn-outline-secondary(href='https://cart.cashier.ecpay.com.tw/qp/msp6' target='_blank' rel='nofollow noreferrer noopener') NT$500
+        .d-flex.flex-column.align-items-center
+          span.mb-3 或是
+          a.btn.btn-outline-secondary(href='https://cart.cashier.ecpay.com.tw/qp/msr3' target='_blank' rel='nofollow noreferrer noopener') 任意金額
+    .donate__thankful.py-5
+      .container.p-4
+        .py-4.border-top.border-bottom.d-flex.justify-content-center.align-items-center
+          p.h5.text-muted.mb-0.mr-3 謝謝每一位支持我的朋友
+          span.icon--size--lg.icon__thankful

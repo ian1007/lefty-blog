@@ -1,0 +1,218 @@
+#aboutme {
+  .aboutme__profile {
+    &:before {
+      content: "";
+      display: block;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100vh;
+      z-index: -10;
+      background: url("/about-me/about-me_20201127.png") no-repeat center center;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+    .profile__image {
+      width: 250px;
+      img {
+        border: thick solid $white;
+      }
+    }
+    button {
+      background-color: inherit;
+      cursor: default;
+      .collapse.show,
+      .collapsing {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  }
+  .aboutme__values {
+    background-image: url("/background-image-dot.png");
+    @include icon-background(center center, repeat, initial);
+    .carousel-item.d-table-cell {
+      visibility: hidden;
+      transition: none;
+      &.active,
+      &.carousel-item-prev,
+      &.carousel-item-next {
+        visibility: visible;
+      }
+      &.active.carousel-item-left,
+      &.active.carousel-item-right {
+        visibility: hidden;
+      }
+      .aboutme__question {
+        padding: 0 2rem; // 配合 quotes
+      }
+    }
+  }
+  .aboutme__resume {
+    background-color: $white;
+    .resume__option {
+      a.btn.btn-outline-primary {
+        padding: $btn-padding-y $btn-padding-x;
+        &:first-child {
+          border-top-left-radius: $btn-border-radius;
+        }
+        &:last-child {
+          border-bottom-right-radius: $btn-border-radius;
+        }
+        & + .list-group-item {
+          border-top-width: $btn-border-width;
+          &.active {
+            margin-top: 0px;
+            border-top-width: $btn-border-width;
+            border-color: $primary;
+          }
+        }
+      }
+    }
+    .timeline-item {
+      position: relative;
+      padding-left: 2 * $spacer;
+      padding-bottom: 2 * $spacer;
+      &:last-child {
+        padding-bottom: 0;
+      }
+      .timeline-info {
+        font-size: $font-size-sm;
+        letter-spacing: 3px;
+        white-space: nowrap;
+      }
+      .timeline-marker {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 1rem;
+        &:before {
+          content: "";
+          position: absolute;
+          top: (($h4-font-size * $headings-line-height) - 1rem) / 2;
+          left: 50%;
+          transform: translateX(-50%);
+          display: block;
+          width: 1rem;
+          height: 1rem;
+          background-color: $primary;
+          border: 3px solid transparent;
+          border-radius: 50%;
+          transition: $transition-base;
+        }
+        &:after {
+          content: "";
+          position: absolute;
+          top: $h4-font-size * $headings-line-height;
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          display: block;
+          width: 3px;
+          background-color: $gray-300;
+        }
+      }
+      .timeline-content {
+        p:last-child {
+          margin-bottom: 0;
+        }
+      }
+      &.period {
+        .timeline-info {
+          display: none;
+        }
+        .timeline-marker {
+          &:before {
+            top: 0;
+            bottom: 2rem;
+            width: 1rem;
+            height: auto;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            border-top: 3px solid $gray-300;
+            border-bottom: 3px solid $gray-300;
+          }
+          &:after {
+            content: "";
+            height: 2rem;
+            top: auto;
+          }
+        }
+      }
+      &:last-child .timeline-marker::before {
+        border-bottom: none;
+      }
+      &:last-child .timeline-marker:after {
+        content: none;
+      }
+    }
+  }
+}
+@media (max-width: 575px) {
+  .aboutme__values .carousel-control-prev,
+  .aboutme__values .carousel-control-next {
+    width: 50%;
+    height: 2rem;
+  }
+}
+@media (min-width: 992px) {
+  #aboutme .aboutme__resume .timeline-centered {
+    .timeline-item,
+    .timeline-content {
+      padding-left: 0;
+    }
+    .timeline-marker {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .timeline-info,
+    .timeline-content {
+      width: 50%;
+    }
+    > .timeline-item:not(.period):nth-child(odd) .timeline-info,
+    > .timeline-item:not(.period):nth-child(even) .timeline-content {
+      order: 0;
+      text-align: right;
+      padding-right: 2rem;
+    }
+    > .timeline-item:not(.period):nth-child(even) .timeline-info,
+    > .timeline-item:not(.period):nth-child(odd) .timeline-content {
+      order: 1;
+      text-align: left;
+      padding-left: 2rem;
+    }
+    > .timeline-item:not(.period):nth-child(even) .timeline-content .form-row {
+      flex-direction: row-reverse;
+    }
+    > .timeline-item.period .timeline-content {
+      width: 100%;
+      text-align: center;
+    }
+  }
+}
+@media (hover: hover) {
+  #aboutme .aboutme__resume .timeline-item:not(.period):hover .timeline-marker:before {
+    background: transparent;
+    border: 3px solid $primary;
+  }
+  #aboutme .aboutme__profile a:hover,
+  #aboutme .aboutme__resume .timeline-item .timeline-content a:hover {
+    text-decoration: underline;
+  }
+}
+@media (hover: none) {
+  #aboutme .aboutme__resume .resume__option a.btn.btn-outline-primary:not(:active):hover {
+    border-color: $list-group-border-color;
+  }
+}
+@media (min-width: 576px) {
+  #aboutme .aboutme__resume .ratio-box {
+    margin-top: 1.5rem * ($headings-line-height - 1) / 2; // 對齊 h4
+  }
+}

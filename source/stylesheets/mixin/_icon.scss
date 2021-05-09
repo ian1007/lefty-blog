@@ -1,0 +1,23 @@
+@mixin icon($icon_width, $icon_height, $icon_min_width, $icon_min_height, $position, $repeat, $size) {
+    display: block;
+    width: $icon_width;
+    height: $icon_height;
+    min-width: $icon_min_width;
+    min-height: $icon_min_height;
+    background-position: $position;
+    background-repeat: $repeat;
+    background-size: $size;
+}
+
+@mixin icon-size($icon_width, $icon_height, $icon_min_width, $icon_min_height) {
+    width: $icon_width;
+    height: $icon_height;
+    min-width: $icon_min_width;
+    min-height: $icon_min_height;
+}
+
+@mixin icon-background($position, $repeat, $size) {
+    background-position: $position;
+    background-repeat: $repeat;
+    background-size: $size;
+}

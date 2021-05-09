@@ -1,0 +1,29 @@
+#categories {
+  .categories__category {
+    a {
+      user-select: none;
+      color: $body-color;
+      .categories__icon {
+        display: block;
+        @include icon-size($icon--size--xl, $icon--size--xl, $icon--size--xl, $icon--size--xl);
+      }
+      position: relative;
+      &:not(:last-child):after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-bottom: $border-width solid $border-color;
+      }
+    }
+    position: relative;
+    .btn__more {
+      position: absolute;
+      top: 3.5rem;
+      right: 1rem;
+      transform: translateY(-50%);
+    }
+  }
+}

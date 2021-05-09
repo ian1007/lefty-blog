@@ -1,0 +1,59 @@
+#login {
+  user-select: none;
+  @include footer-bottom;
+  .card {
+    .login__icon {
+      background-image: url("/icon/favicon.svg");
+      @include icon($icon--size--xl, $icon--size--xl, $icon--size--xl, $icon--size--xl, center center, no-repeat, auto);
+    }
+    button {
+      background-color: $white;
+      border: $border-width solid $border-color;
+      color: $body-color;
+      .google-icon {
+        background-image: url("https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg");
+        @include icon($font-size-lg, $font-size-lg, $font-size-lg, $font-size-lg, center center, no-repeat, auto);
+      }
+    }
+  }
+  footer a {
+    font-size: $font-size-sm;
+  }
+}
+
+@media (min-width: 601px) {
+  // follow google
+  #login {
+    position: relative;
+    .card {
+      width: 450px;
+      margin: 0 auto;
+      border: $border-width solid $border-color;
+      box-shadow: $box-shadow-sm;
+      .card-body {
+        min-height: 500px;
+      }
+    }
+    &:before,
+    &:after {
+      content: "";
+      display: block;
+      flex-grow: 1;
+    }
+    &::before {
+      min-height: 30px;
+    }
+    &::after {
+      min-height: 65px;
+    }
+    footer {
+      width: 450px;
+      margin: 0 auto;
+    }
+  }
+}
+@media (hover: hover) {
+  #login .card button:hover {
+    background-color: #e8f0fe;
+  }
+}

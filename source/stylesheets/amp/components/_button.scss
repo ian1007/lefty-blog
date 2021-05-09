@@ -1,0 +1,43 @@
+@each $color, $value in $theme-colors {
+  .btn-#{$color} {
+    &:not(:disabled):not(.disabled):not(:hover):not(:active):focus {
+      @include button-color($value, $value, none);
+    }
+    &:not(:disabled):not(.disabled):not(:active):hover:focus {
+      @include button-color(darken($value, 7.5%), darken($value, 10%), none);
+    }
+  }
+  .btn-outline-#{$color} {
+    &:not(:disabled):not(.disabled).active:focus,
+    &:not(:disabled):not(.disabled):active:focus,
+    &:not(:disabled):not(.disabled):not(:hover):not(:active):focus,
+    &:not(:disabled):not(.disabled):not(:active):hover:focus {
+      box-shadow: none;
+    }
+  }
+}
+.btn-group > .btn:hover {
+  z-index: unset;
+}
+@media (hover: hover) {
+  .btn-outline-info:hover {
+    color: $gray-900;
+    background-color: $gray-300;
+    border-color: $gray-300;
+  }
+}
+@media (hover: none) {
+  // override bootstrap 的 btn:hover，使在 touch-screen 時，hover 不會有變化
+  @each $color, $value in $theme-colors {
+    .btn-#{$color}:hover {
+      color: color-yiq($value);
+      background-color: $value;
+      border-color: $value;
+    }
+    .btn-outline-#{$color}:hover {
+      color: $value;
+      background-color: unset;
+      border-color: $value;
+    }
+  }
+}

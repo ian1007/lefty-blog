@@ -1,0 +1,11 @@
+#donate {
+  .donate__quotes {
+    background-image: url("/background-image-dot.png");
+    @include icon-background(center center, repeat, initial);
+  }
+  .donate__items {
+    img {
+      @include icon-size($icon--size--xl, $icon--size--xl, $icon--size--xl, $icon--size--xl);
+    }
+  }
+}

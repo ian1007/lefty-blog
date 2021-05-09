@@ -1,0 +1,16 @@
+#notFound {
+  .notFound {
+    background-image: url("/404.png");
+    width: 286px;
+    max-width: 100%;
+    height: 164px;
+    @include icon-background(center center, no-repeat, contain);
+  }
+}
+
+@media (min-width: 992px) {
+  #notFound .notFound {
+    width: 572px;
+    height: 328px;
+  }
+}

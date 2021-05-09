@@ -1,0 +1,79 @@
+@each $color, $value in $theme-colors {
+  .btn-#{$color} {
+    &:not(:disabled):not(.disabled):not(:hover):not(:active):focus {
+      @include button-color($value, $value, none);
+    }
+    &:not(:disabled):not(.disabled):not(:active):hover:focus {
+      @include button-color(darken($value, 7.5%), darken($value, 10%), none);
+    }
+  }
+  .btn-outline-#{$color} {
+    &:not(:disabled):not(.disabled).active:focus,
+    &:not(:disabled):not(.disabled):active:focus,
+    &:not(:disabled):not(.disabled):not(:hover):not(:active):focus,
+    &:not(:disabled):not(.disabled):not(:active):hover:focus {
+      box-shadow: none;
+    }
+  }
+}
+.close {
+  &:not(:disabled):not(.disabled):not(:hover):not(:active):focus {
+    opacity: 0.5;
+  }
+}
+.btn__more {
+  // size
+  @include icon(2rem, 2rem, 2rem, 2rem, center center, no-repeat, 40% 40%);
+  // override
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  &:active {
+    opacity: 0.5;
+    outline: none;
+  }
+  &:not(:active):focus {
+    outline: none;
+  }
+}
+.btn-group > .btn:hover {
+  z-index: unset;
+}
+.carousel-control-next,
+.carousel-control-prev {
+  &:not(:disabled):not(.disabled):not(:hover):not(:active):focus {
+    opacity: $carousel-control-opacity;
+  }
+}
+@media (hover: hover) {
+  .btn-outline-info:hover {
+    color: $gray-900;
+    background-color: $gray-300;
+    border-color: $gray-300;
+  }
+  .btn__more:hover {
+    opacity: 0.5;
+  }
+}
+@media (hover: none) {
+  // override bootstrap 的 btn:hover，使在 touch-screen 時，hover 不會有變化
+  @each $color, $value in $theme-colors {
+    .btn-#{$color}:hover {
+      color: color-yiq($value);
+      background-color: $value;
+      border-color: $value;
+    }
+    .btn-outline-#{$color}:hover {
+      color: $value;
+      background-color: unset;
+      border-color: $value;
+    }
+  }
+  .close:not(:disabled):not(.disabled):not(:active):hover {
+    opacity: 0.5;
+  }
+  .carousel-control-next:not(:active):hover,
+  .carousel-control-prev:not(:active):hover {
+    opacity: $carousel-control-opacity;
+  }
+}

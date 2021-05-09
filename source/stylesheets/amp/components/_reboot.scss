@@ -1,0 +1,36 @@
+/* Bootstrap 的 reboot 補充 */
+html {
+  // 減少鋸齒，更平順
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  // 錨點平滑跳轉，safari 不支援
+  scroll-behavior: smooth;
+  // 只允許進行滾動和持續縮放操作，禁用其他非標準手勢，例如雙擊以進行縮放。
+  touch-action: manipulation;
+}
+body {
+  letter-spacing: $body--letter--spacing;
+}
+button {
+  letter-spacing: $body--letter--spacing;
+  &:active,
+  &:not(:active):focus {
+    outline: none;
+  }
+}
+ol,
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+::selection {
+  background-color: lighten($primary, 10%);
+  color: $white;
+}
+amp-lightbox,
+amp-sidebar {
+  width: 100vw;
+  max-width: 100vw;
+  z-index: $zindex-lightbox;
+  background-color: var(--neutral-lightest);
+}

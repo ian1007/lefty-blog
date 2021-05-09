@@ -1,0 +1,82 @@
+extends _admin_layout.pug
+
+block sharing
+  meta(property='og:type' content='website')
+
+block head
+
+block pre_scripts
+
+block content
+  main.container-fluid.container__fixedNavbar--margin
+    #categoryEditor.container.pt-sm-4.pb-5
+      form#main-content.row.mb-5(action=(category.id)?'/admin/category/update/'+category.id:'/admin/category/create' method='POST' autocomplete='off' data-id=(category.id)?category.id:'')
+        #categoryEditor__icon.col-lg-8.mb-3.mb-lg-0.col--border
+          .card
+            .card-body
+              .d-flex.align-items-center.mb-4
+                span.card__title__icon.icon__categories--black
+                span.ml-2.card__title__hightlightWithIcon 主題縮圖
+                span.form__info__icon.icon__info--black(data-toggle='popover' data-placement='bottom')
+                  .d-none
+                    .form__info
+                      .d-block.py-1 非必要。
+                      .d-block.py-1.border-top 這會是每篇貼文中，主題旁的 icon，如果沒有上傳，預設會顯示網頁的 favicon。
+              #img-crop.d-flex.justify-content-center.pt-3.pb-5
+                #upload.form-group.mb-0
+                  if category.id && category.thumbnail!==''
+                    img.rounded-circle(src=category.thumbnail)
+                  else
+                    img.rounded-circle(src=blogger.othersThumbnail)
+                  label#filedrag(for='fileselect')
+                    .image-wrapper.icon__upload--white
+                  input#fileselect.d-none(type='file' accept='.jpg, .png, .webp')
+                  input#thumbnail(type='hidden' name='thumbnail' value=category.thumbnail||'')
+                #crop.row.justify-content-between.justify-content-sm-around
+                  #croppie.mb-5.mb-sm-0.col-12.col-sm-auto.px-0.order-sm-1
+                  button#prev.mt-3.mt-sm-0.order-sm-0.btn.btn-info.text-muted(type='button') 取消
+                  button#next.mt-3.mt-sm-0.order-sm-2.btn.btn-info.text-muted(type='button') 確認
+                #result
+                  img.rounded-circle(src='')
+                  button#close.close(type='button')
+                    span &times;
+        #sidebar.col-lg-4
+          .sidebar__inner
+            .card.mb-3
+              .card-body
+                .d-flex.align-items-center.mb-4
+                  span.card__title__icon.icon__seo--black
+                  span.ml-2.card__title__hightlightWithIcon 主題資訊
+                .form-group
+                  label.d-flex.align-items-center
+                    span 名稱
+                    span.form__info__icon.icon__info--black(data-toggle='popover' data-placement='right')
+                      .d-none
+                        .form__info
+                          .d-block.py-1 必填。
+                  input#name.form-control(type='text' name='name' value=category.name||'' spellcheck='false' onkeydown="return event.key != 'Enter';")
+                  .messages
+                .form-group
+                  label.d-flex.align-items-center
+                    span 簡介
+                    span.form__info__icon.icon__info--black(data-toggle='popover' data-placement='right')
+                      .d-none
+                        .form__info
+                          .d-block.py-1 非必填。
+                          .d-block.py-1.border-top 這部分會出現在搜尋結果的標題下方，以及主題總覽頁面中的介紹。
+                  textarea#description.form-control(type='text' name='description' spellcheck='false')=category.description
+                  .messages
+                .form-group
+                  label.d-flex.align-items-center
+                    span 網址
+                    span.form__info__icon.icon__info--black(data-toggle='popover' data-placement='right')
+                      .d-none
+                        .form__info
+                          .d-block.py-1 必填。
+                          .d-block.py-1.border-top 不建議更換網址。更換網址後，貼文的留言將會被重置，舊的留言雖然不會被刪除，但是會被保存在原本的網址。
+                          .d-block.py-1.border-top 可以輸入中文網址，雖然在某些地方會以亂碼呈現，但是在可以正常呈現的地方，其辨識度較高，使用前請再評估。
+                          .d-block.py-1.border-top=blogger.domain+'只需要輸入這個部分/貼文的網址'
+                  input#path.form-control(type='text' name='path' value=category.path||'' spellcheck='false' onkeydown="return event.key != 'Enter';")
+                  .messages
+            .d-flex.pb-5
+              button.btn.btn-primary.w-25.mx-auto.mr-sm-4.d-flex.justify-content-center(type='submit') 發佈

@@ -1,0 +1,208 @@
+extends _admin_layout.pug
+
+block sharing
+  meta(property='og:type' content='website')
+
+block head
+
+block pre_scripts
+
+block content 
+  main.container-fluid.container__fixedNavbar--margin
+    #postEditor.container.pt-sm-4.pb-5
+      form#main-content.row.mb-5(action=(post.status!=='creating')?'/admin/post/update/'+post.objectID:'/admin/post/create' method='POST' autocomplete='off' data-id=post.objectID data-status=post.status)
+        #postEditor__content.col-lg-8.mb-3.mb-lg-0.col--border
+          .card
+            .card-body.pb-5
+              .d-flex.align-items-center.mb-4
+                span.card__title__icon.icon__content--black
+                span.ml-2.card__title__hightlightWithIcon 貼文內容
+              .form-group
+                textarea#title.form-control.form-control-lg(type='text' name='title' placeholder='標題' spellcheck='false' style='height: 46px')=post.title
+                .messages
+              hr
+              .form-group
+                textarea.editor.invisible(name='content')
+                  =post.content||''
+                .messages
+              hr
+              .form-group.mb-0
+                label.d-flex.align-items-center(for='tags')
+                  span 標籤
+                  span.form__info__icon.icon__info--black(data-toggle='popover' data-placement='right')
+                    .d-none
+                      .form__info
+                        .d-block.py-1 非必填。
+                        .d-blcok.py-1.border-top 請按 ENTER，以分開標籤。
+                input#tags.form-control(type='tag' name='tags' value=post.tags||'' spellcheck='false')
+                .messages
+        #sidebar.col-lg-4
+          .sidebar__inner
+            #postEditor__categories.card.mb-3
+              .card-body.form-group.mb-0
+                .d-flex.align-items-center.mb-4
+                  span.card__title__icon.icon__categories--black
+                  span.ml-2.card__title__hightlightWithIcon 選擇主題
+                  span.form__info__icon.icon__info--black(data-toggle='popover' data-placement='bottom')
+                    .d-none
+                      .form__info
+                        .d-block.py-1 不建議更換主題。更換主題後，等同於更換貼文的網址，貼文的留言將會被重置，舊的留言雖然不會被刪除，但是會被保存在原本的網址。
+                -for(categoriesDoc in categories)
+                  input.form-check-input.d-none(type='radio' name='category' id=categoriesDoc value=categories[categoriesDoc].id checked=(categories[categoriesDoc].id===post.category)?true:false)
+                  label.form-check-label.rounded-sm(for=categoriesDoc)
+                    .d-flex.align-items-center
+                      img.card__title__icon--lg.rounded-circle(src=categories[categoriesDoc].thumbnail||blogger.othersThumbnail)
+                      span.ml-3=categories[categoriesDoc].name
+                input.form-check-input.d-none(type='radio' name='category' id='others' value='其他' checked=(!post.category||post.category==='其他')?true:false)
+                label.form-check-label.rounded-sm(for='others')
+                  .d-flex.align-items-center
+                    img.card__title__icon--lg.rounded-circle(src=blogger.othersThumbnail)
+                    span.ml-3 其他
+            .card.mb-3
+              .card-body
+                .d-flex.align-items-center.mb-4
+                  span.card__title__icon.icon__seo--black
+                  span.ml-2.card__title__hightlightWithIcon 貼文資訊
+                .form-group.d-none
+                  input#featuredImage(type='hidden' name='featuredImage' value=post.featuredImage||'')
+                .form-group.d-none
+                  input#descriptionDefault(type='hidden' name='descriptionDefault' value=post.descriptionDefault||'')
+                .form-group
+                  label.d-flex.align-items-center(for='description')
+                    span 簡介
+                    span.form__info__icon.icon__info--black(data-toggle='popover' data-placement='right')
+                      .d-none
+                        .form__info
+                          .d-block.py-1 非必填。
+                          .d-block.py-1.border-top 這部分會出現在搜尋結果的標題下方，以及貼文的預覽內容。
+                          .d-block.py-1.border-top 不打算填寫的話，會以貼文的首段作為預設內容。
+                  textarea#description.form-control(type='text' name='description' spellcheck='false')=post.description
+                  .messages
+                .form-group
+                  label.d-flex.align-items-center(for='path')
+                    span 網址
+                    span.form__info__icon.icon__info--black(data-toggle='popover' data-placement='right')
+                      .d-none
+                        .form__info
+                          .d-block.py-1 必填。
+                          .d-block.py-1.border-top 不建議更換網址。更換網址後，貼文的留言將會被重置，舊的留言雖然不會被刪除，但是會被保存在原本的網址。
+                          .d-block.py-1.border-top 可以輸入中文網址，雖然在某些地方會以亂碼呈現，但是在可以正常呈現的地方，其辨識度較高，使用前請再評估。
+                          .d-block.py-1.border-top=blogger.domain+'主題的網址/只需要輸入這個部分'
+                  input#path.form-control(type='text' name='path' value=post.path||'' spellcheck='false' onkeydown="return event.key != 'Enter';")
+                  .messages
+            .d-flex.px-4.pb-5
+              .btn-group.btn-group-toggle.w-50.form-group.mb-0(data-toggle='buttons')
+                label.btn.btn-outline-info
+                  input(type='radio' name='status' value='draft' checked=(post.status==='draft'||post.status==='creating')?true:false)
+                  | 草稿
+                label.btn.btn-outline-info
+                  input(type='radio' name='status' value='public' checked=(post.status==='public')?true:false)
+                  | 公開
+              span.form__info__icon.icon__info--black(data-toggle='popover' data-placement='top')
+                .d-none
+                  .form__info
+                    .d-block.py-1 公開區的貼文排序會依據第一次公開貼文的時間。
+                    .d-block.py-1.border-top 草稿區的貼文排序會依據第一次發佈貼文的時間。
+                    .d-blcok.py-1.border-top 每次更新貼文後，會在貼文內顯示更新時間。
+              button.btn.btn-primary.w-25.ml-auto.d-flex.justify-content-center(type='submit') 發佈
+
+block scripts
+  script(src='/ckeditor.js')
+  script.
+    class CustomFigureAttributes {
+      constructor(editor) {
+        this.editor = editor;
+      }
+      afterInit() {
+        const editor = this.editor;
+        setupCustomAttributeConversion('img', 'image', 'loading', editor);
+      }
+    }
+    function setupCustomAttributeConversion(viewElementName, modelElementName, viewAttribute, editor) {
+      editor.conversion.for('downcast').add(downcastAttribute(modelElementName, viewElementName, viewAttribute));
+    }
+    function findViewChild(viewElement, viewElementName, conversionApi) {
+      const viewChildren = Array.from(conversionApi.writer.createRangeIn(viewElement).getItems());
+      return viewChildren.find(item => item.is('element', viewElementName));
+    }
+    function downcastAttribute(modelElementName, viewElementName, viewAttribute) {
+      return dispatcher => dispatcher.on(`insert:${modelElementName}`, (evt, data, conversionApi) => {
+        const modelElement = data.item;
+        const viewFigure = conversionApi.mapper.toViewElement(modelElement);
+        const viewElement = findViewChild(viewFigure, viewElementName, conversionApi);
+        if (!viewElement) {
+          return;
+        }
+        conversionApi.writer.setAttribute(viewAttribute, 'lazy', viewElement);
+      });
+    }
+    ClassicEditor
+      .create(document.querySelector('.editor'), {
+        toolbar: {
+          items: [
+            'heading',
+            '|',
+            'imageUpload',
+            'link',
+            '|',
+            'blockQuote',
+            'bold',
+            '|',
+            'insertTable',
+            'horizontalLine',
+            '|',
+            'htmlEmbed'
+          ],
+          viewportTopOffset: 61
+        },
+        extraPlugins: [CustomFigureAttributes],
+        language: 'zh',
+        heading: {
+          options: [
+            { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+            { model: 'heading1', view: 'h2', title: 'Heading 1', class: 'ck-heading_heading1' },
+            { model: 'heading2', view: 'h3', title: 'Heading 2', class: 'ck-heading_heading2' }
+          ]
+        },
+        image: {
+          toolbar: [
+            'imageTextAlternative',
+            'linkImage'
+          ]
+        },
+        link: {
+          addTargetToExternalLinks: true,
+          decorators: {
+            addTargetToExternalLinks: {
+              mode: 'automatic',
+              callback: url => /^(https?:)?\/\//.test(url),
+              attributes: {
+                target: '_blank',
+                rel: 'noopener noreferrer'
+              }
+            }
+          }
+        },
+        table: {
+          contentToolbar: [
+            'tableColumn',
+            'tableRow',
+            'mergeTableCells'
+          ]
+        },
+        simpleUpload: {
+          uploadUrl: '/admin/uploads/#{post.objectID}',
+        },
+        mediaEmbed: {
+          previewsInData: true,
+          removeProviders: ['instagram', 'twitter', 'googleMaps', 'flickr', 'facebook', 'vimeo', 'spotify', 'dailymotion']
+        }
+      })
+      .then(editor => {
+        window.editor = editor;
+      })
+      .catch(error => {
+        console.error('哦不，哪裡出錯了');
+        console.error('請聯絡開發商，回報此問題');
+        console.error(error);
+      });

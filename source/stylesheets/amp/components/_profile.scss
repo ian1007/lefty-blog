@@ -1,0 +1,25 @@
+.profile {
+  .profile__photo {
+    width: 40%;
+  }
+  .profile__intro {
+    width: 60%;
+    padding-left: 0.5rem;
+    .profile__author {
+      color: var(--neutral-darkest);
+      font-size: 1.2rem;
+    }
+    .profile__title {
+      width: fit-content;
+      padding: 0.14rem 0.65rem;
+      background-color: burlywood;
+      color: $white;
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+    .profile__subtitle {
+      font-size: 0.85rem;
+      line-height: 1.3;
+    }
+  }
+}

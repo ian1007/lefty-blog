@@ -1,0 +1,27 @@
+header.navbar.navbar-expand-lg.navbar-light.border-bottom.smart-scroll
+  #navbarCollapse.container
+    button.navbar-toggler.order-lg-1.border-0(type='button' data-toggle='collapse' data-target='#navbarNavAltMarkup')
+      span.navbar__toggler__icon.icon__hamburger--black
+    a.navbar-brand.order-lg-0.mr-0.mr-lg-4.px-4.px-lg-0(href='/' title=blogger.author)
+      picture.ratio-box(style='padding-bottom: 30px')
+        source(srcset='/icon/logo.svg' media='(min-width: 992px)')
+        img(src='/icon/favicon.svg' alt=blogger.author)
+    button.navbar-toggler.order-lg-2.border-0(type='button' data-toggle='collapse' data-target='#navbarNavSearchBar')
+      span.navbar__toggler__icon.icon__search--black
+    #navbarNavSearchBar.collapse.navbar-collapse(data-parent='#navbarCollapse')
+      form#form__search.py-3.px-4.py-lg-0.px-lg-0(action='/search')
+        input#form__searching.form-control.py-0(type='search' name='query' placeholder='找找看...' autocomplete='off' value=searching||'')
+    nav#navbarNavAltMarkup.collapse.navbar-collapse.ml-auto.pl-lg-2(data-parent='#navbarCollapse')
+      ul.navbar-nav
+        li.nav-item
+          a.nav-link.d-flex.align-items-center.rounded-sm(href='/about-me' rel='author')
+            span.navbar__icon.icon__aboutme--black.mx-4.mx-lg-2
+            span.mr-lg-2 關於我
+        li.nav-item
+          a.nav-link.d-flex.align-items-center.rounded-sm(href='/categories')
+            span.navbar__icon.icon__categories--black.mx-4.mx-lg-2
+            span.mr-lg-2 所有主題
+        li.nav-item
+          a.nav-link.d-flex.align-items-center.rounded-sm(href='/donate')
+            span.navbar__icon.icon__donate--black.mx-4.mx-lg-2
+            span.mr-lg-2 自由樂捐

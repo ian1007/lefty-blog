@@ -1,0 +1,16 @@
+// 讓 footer 置底
+@mixin footer-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  footer {
+    margin-top: auto;
+  }
+}
+// 過長的文字變成 ...
+@mixin text-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

@@ -1,0 +1,16 @@
+html {
+  min-width: $html--min--width;
+  body {
+    .navbar {
+      min-width: $html--min--width;
+    }
+    .container-fluid {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .container__fixedNavbar--margin {
+      margin-top: $navbar--max--height;
+    }
+    @include footer-bottom;
+  }
+}

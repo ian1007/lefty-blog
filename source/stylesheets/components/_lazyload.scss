@@ -1,0 +1,30 @@
+// 當使用 lazyload 但是 load 失敗導致破圖時，將圖片隱藏起來
+img.lazyload:not([src]) {
+    visibility: hidden;
+}
+// fade-in
+.lazyload,
+.lazyloading {
+    opacity: 0;
+}
+.lazyloaded {
+    opacity: 1;
+    transition: $transition-base;
+}
+// 防止載入時頁面跳動
+.ratio-box {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 0;
+    /* padding-bottom is calculated and rendered in to HTML */
+}
+.ratio-box img,
+.ratio-box iframe {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

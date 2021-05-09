@@ -1,0 +1,22 @@
+footer.container-fluid.border-top.bg-primary
+  .container
+    .d-flex.flex-column.align-items-center
+      .footer__snsLink.d-flex.justify-content-center.align-items-center.py-3
+        a.d-flex.align-items-center.py-3.text-white.rounded-sm(href=blogger.snsLink.youtube target='_blank')
+          span.icon--size.icon__youtube--white.mx-4.mr-lg-2
+          span.d-none.d-lg-block.mr-lg-4 YouTube
+        a.d-flex.align-items-center.py-3.text-white.rounded-sm(href=blogger.snsLink.facebook target='_blank')
+          span.icon--size.icon__facebook--white.mx-4.mr-lg-2
+          span.d-none.d-lg-block.mr-lg-4 Facebook
+        a.d-flex.align-items-center.py-3.text-white.rounded-sm(href=blogger.snsLink.instagram target='_blank')
+          span.icon--size.icon__instagram--white.mx-4.mr-lg-2
+          span.d-none.d-lg-block.mr-lg-4 Instagram
+        a.d-flex.align-items-center.py-3.text-white.rounded-sm(href=blogger.snsLink.linkedin target='_blank')
+          span.icon--size.icon__linkedin--white.mx-4.mr-lg-2
+          span.d-none.d-lg-block.mr-lg-4 LinkedIn
+      .footer__copyright.d-flex.justify-content-center.align-items-center.py-4
+        a.text-white(href='/admin' title=blogger.author) ©
+          | 
+          =moment().format('YYYY')
+          | 
+          =blogger.author

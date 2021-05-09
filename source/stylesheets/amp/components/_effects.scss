@@ -1,0 +1,8 @@
+@for $i from 1 through 3 {
+  .line-clamp-#{$i} {
+    display: -webkit-box;
+    -webkit-line-clamp: $i;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}

@@ -1,0 +1,44 @@
+extends _admin_layout.pug
+
+block sharing
+  meta(property='og:type' content='website')
+
+block head
+
+block pre_scripts
+
+block content
+  main#categories.container-fluid.container__fixedNavbar--margin
+    .container.py-5
+      -for(let categoryDoc in categories)
+        .categories__category(id=categories[categoryDoc].id)
+          a.d-flex.flex-column.align-items-center.p-4.hover--shadow.rounded-sm(href='/admin/categories/'+categories[categoryDoc].path)
+            img.categories__icon.rounded-circle.mb-3.lazyload(data-src=categories[categoryDoc].thumbnail||blogger.othersThumbnail alt=categories[categoryDoc].name)
+            h1.categories__name.h5=categories[categoryDoc].name
+            p.categories__description.text-center.text-muted.mb-0=categories[categoryDoc].description
+          button.btn__more.icon__more--gray(type='button' data-toggle='popover' data-placement='left' data-id=categories[categoryDoc].id data-path=categories[categoryDoc].path)
+      .categories__category
+        a.d-flex.flex-column.align-items-center.p-4.hover--shadow.rounded-sm(href='/admin/categories/others')
+          img.categories__icon.rounded-circle.mb-3.lazyload(data-src=blogger.othersThumbnail alt='其他')
+          h1.categories__name.h5 其他
+          p.categories__description.text-center.text-muted.mb-0 沒有分類的貼文
+    #categories__more.d-none
+      a.more__option.d-flex.align-items-center(href='#')
+        span.more__option__icon.icon__edit--gray
+        span.more__option__text 編輯
+      button.more__option.d-flex.align-items-center(type='button' data-toggle='modal' data-target='#categoryDelete')
+        span.more__option__icon.icon__delete--gray
+        span.more__option__text 刪除
+    #categoryDelete.modal.fade(tabindex='-1')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            span.h5.modal-title 確定刪除此主題
+            button.close(type='button' data-dismiss='modal')
+              span &times;
+          .modal-body
+            span.d-block.mb-3 刪除此主題後，主題內的貼文將會移至「其他」，並不會被刪除。但請注意，一旦刪除主題，即無法恢復！此外，刪除主題後，等同於更換貼文的網址，貼文的留言將會被重置，舊的留言雖然不會被刪除，但是會被保存在原本的網址。
+            span.d-block 確定刪除的話，請點選「確定」。
+          .modal-footer
+            button.btn.btn-info.text-muted(type='button' data-dismiss='modal') 取消
+            button#deleteConfirm.btn.btn-danger(type='button' data-dismiss='modal') 確定

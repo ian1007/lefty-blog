@@ -1,0 +1,127 @@
+.swiper-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  z-index: 1;
+  user-select: none;
+  .swiper-wrapper {
+    display: flex;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    -webkit-transform-style: preserve-3d; // safari flickering issue
+    .swiper-slide {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+      position: relative;
+      width: 100%;
+      -webkit-backface-visibility: hidden; // safari flickering issue
+      -webkit-transform: translate3d(0, 0, 0); // safari flickering issue
+      &:not(.swiper-slide-active) {
+        opacity: 0.7;
+      }
+    }
+  }
+  /* Navigation */
+  & > .container {
+    // 為了讓 Navigation 的位置正確
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+  }
+  .swiper-button-prev,
+  .swiper-button-next {
+    position: absolute;
+    top: 50%;
+    width: $swiper__navigation--size;
+    height: $swiper__navigation--size;
+    cursor: pointer;
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 25%;
+      left: 25%;
+      width: 50%;
+      height: 50%;
+      border-top: 0.5rem solid $black;
+      border-left: 0.5rem solid $black;
+      border-radius: $border-radius-sm;
+      opacity: 0.2;
+    }
+    &:active:after {
+      opacity: $swiper__navigation--hover--opacity;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+  .swiper-button-prev {
+    left: -$swiper__navigation--size;
+    transform: translate(-50%, -50%);
+    &:after {
+      transform: rotate(-45deg);
+    }
+  }
+  .swiper-button-next {
+    right: -$swiper__navigation--size;
+    transform: translate(50%, -50%);
+    &:after {
+      transform: rotate(135deg);
+    }
+  }
+  /* Pagination */
+  .swiper-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 1;
+  }
+  /* Bullets */
+  .swiper-pagination-bullets {
+    bottom: $spacer / 2;
+    width: 100%;
+    .swiper-pagination-bullet {
+      display: block;
+      position: relative;
+      width: $font-size-lg;
+      height: $font-size-lg;
+      margin: 0 0.5rem;
+      cursor: pointer;
+      &:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: $font-size-base / 2;
+        height: $font-size-base / 2;
+        border-radius: 50%;
+        background: $black;
+        opacity: 0.1;
+      }
+      &:focus {
+        outline: none;
+      }
+    }
+    .swiper-pagination-bullet-active {
+      &:after {
+        background: lighten($primary, 20%);
+        opacity: 1;
+      }
+    }
+  }
+}
+@media (hover: hover) {
+  .swiper-container {
+    .swiper-button-prev:hover:after,
+    .swiper-button-next:hover:after {
+      opacity: $swiper__navigation--hover--opacity;
+    }
+  }
+}

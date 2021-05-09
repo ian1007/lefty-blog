@@ -1,0 +1,11 @@
+.form__info__icon {
+  margin-left: $spacer / 4;
+  @include icon(1rem, 1rem, 1rem, 1rem, center center, no-repeat, 90% 90%);
+}
+.messages {
+  color: $red;
+  margin-top: 0.25rem;
+  p {
+    margin-bottom: 0;
+  }
+}

@@ -1,0 +1,446 @@
+extends _layout.pug
+
+block sharing
+  meta(property='og:type' content='website')
+
+block head
+  script(type='application/ld+json').
+    [{"@context":"https://schema.org","@type":"WebSite","url":"#{blogger.domain}","potentialAction":{"@type":"SearchAction","target":"#{blogger.domain}search?query={search_term_string}","query-input":"required name=search_term_string"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"#{blogger.domain}","name":"#{blogger.author}"}},{"@type":"ListItem","position":2,"item":{"@id":"#{path}","name":"關於我"}}]},{"@context":"https://schema.org","@type":"Organization","url":"#{blogger.domain}","logo":"#{blogger.domain}organization.png"}]
+
+block pre_scripts
+
+block content
+  main#aboutme.container-fluid.container__fixedNavbar--margin
+    .aboutme__profile.pt-5.pb-3
+      .container.p-4
+        .d-flex.flex-column.align-items-center
+          .profile__image.shadow.mb-3
+            picture.ratio-box(style='padding-bottom: 100%;')
+              source(data-srcset='/about-me/左撇子のGen_20201127.webp' type='image/webp')
+              img.rounded-sm.lazyload(data-src='/about-me/左撇子のGen_20201127.jpg' alt='左撇子のGen')
+          h1.h2.mb-3.font-weight-bold 黃彥瑜
+          button.d-flex.flex-column.align-items-center.border-0.px-3(type='button')
+            span.icon--size.icon__contact.mb-3
+            .collapse
+              span.h6.text-muted Email:
+                | 
+                a(href='mailto:lefthanded.gen@gmail.com') lefthanded.gen@gmail.com
+              span.h6.text-muted LINE ID:
+                | 
+                a(href='https://line.me/ti/p/doWod14l-C' target='_blank' rel='noreferrer noopener') raisondetrehyy
+    .aboutme__values.py-5
+      .container.px-4
+        h2.h5.mb-0.text-center.font-weight-bold.py-3 我問我答
+        #aboutme__question.carousel.slide.d-flex.flex-wrap.flex-sm-nowrap.py-4(data-ride='carousel' data-interval='false')
+          .carousel-inner.px-sm-3.px-lg-5.order-sm-1
+            .carousel-item.d-table-cell.active
+              .d-block
+                h3.aboutme__question.h4.font-weight-normal 1️⃣ 我是誰
+                .specialQuotes
+                  p.text-muted.font-weight-bold 我期望哪天自我介紹時，只需要說「哈囉大家好，我是黃彥瑜」就這樣！然後大家的腦海就浮現了我在 How家庭 推廣的內容，還有我在設計網頁，會日文與剪輯，也許還會浮現我在日本留學的故事！哈哈～
+            .carousel-item.d-table-cell
+              .d-block
+                h3.aboutme__question.h4.font-weight-normal 2️⃣ 我的夢想
+                .specialQuotes
+                  p.text-muted.font-weight-bold 我從小的夢想，就是有個普通溫暖的家庭，有時間陪伴家人，有能力和家人到處旅行，甚至能互相開玩笑，這樣的家庭。到現在依然是我努力的目標，也是這個夢想推動了我做 How家庭 的動力。
+          a.carousel-control-prev.order-sm-0.position-relative(href='#aboutme__question' data-slide='prev')
+            span.carousel-control-prev-icon
+          a.carousel-control-next.order-sm-2.position-relative(href='#aboutme__question' data-slide='next')
+            span.carousel-control-next-icon
+    .aboutme__resume.py-5
+      .container.p-4
+        .tab-content
+          #resume__option.anchor
+            .resume__option.btn-group.list-group.flex-row
+              a.btn.btn-outline-primary.list-group-item.active(data-toggle='list' href='#achievement') 小成就
+              a.btn.btn-outline-primary.list-group-item(data-toggle='list' href='#education') 學歷
+              a.btn.btn-outline-primary.list-group-item(data-toggle='list' href='#speech') 分享會
+              a.btn.btn-outline-primary.list-group-item(data-toggle='list' href='#work') 經歷
+          #achievement.tab-pane.fade.show.active.px-2.pt-5
+            ul.timeline-centered
+              li.timeline-item.d-flex.flex-column.flex-lg-row
+                .timeline-info.font-weight-bold.mb-1
+                  span 2020年6月
+                .timeline-marker
+                .timeline-content
+                  .form-row
+                    .col-sm-7
+                      h4.timeline-title 教育部「尋找感動地圖」創新無限獎
+                      span.d-block.text-muted 團隊：
+                        a(href='https://www.facebook.com/fishonplates' target='_blank' rel='noreferrer noopener') 食魚懂魚
+                      span.d-block.text-muted 中央社新聞：  
+                        a(href='https://www.cna.com.tw/news/ahel/202008290064.aspx' target='_blank' rel='nofollow noreferrer noopener') 點我觀看
+                      span.d-block.text-muted 經濟日報：
+                        a(href='https://money.udn.com/money/story/12524/4819240' target='_blank' rel='nofollow noreferrer noopener') 點我觀看
+                      span.d-block.text-muted 聯合新聞網：
+                        a(href='https://udn.com/news/story/7266/4819240' target='_blank' rel='nofollow noreferrer noopener') 點我觀看
+                      span.d-block.text-muted 獨家澎湖報：
+                        a(href='https://www.penghunews.com/general/25988' target='_blank' rel='nofollow noreferrer noopener') 點我觀看
+                      span.d-block.text-muted 青年日報：
+                        a(href='https://www.ydn.com.tw/news/newsInsidePage?chapterID=1255762' target='_blank' rel='nofollow noreferrer noopener') 點我觀看
+                      span.d-block.text-muted PChome 新聞：
+                        a(href='https://news.pchome.com.tw/living/cna/20200829/index-15986722062007718009.html' target='_blank' rel='nofollow noreferrer noopener') 點我觀看
+                      span.d-block.text-muted 教育部新聞：
+                        a(href='https://www.yda.gov.tw/content/NewsLetter/contents.aspx?SiteID=563426067575657313&MmmID=563620326055470206&Msid=1072607630373756133&utm_source=Facebook_PicSee&fbclid=IwAR3x7AXpuoiyIpWT3C6PO9ou_HrwZR9Vphb6z23LlWduofpkDC5we7T9-Lc' target='_blank' rel='nofollow noreferrer noopener') 點我觀看
+                    a.col-sm-5.mt-2.mt-sm-0(href='/tags/尋找感動地圖')
+                      .ratio-box(style='padding-bottom:66.6% /* 426 / 640 * 100% */;')
+                        img.lazyload(data-src='https://imgur.lefty.blog/SbZ5eWUf65bYAn0XCK7W%2F1607340053909_640x640' alt='成果發表頒獎照')
+              li.timeline-item.d-flex.flex-column.flex-lg-row
+                .timeline-info.font-weight-bold.mb-1
+                  span 2020年2月
+                .timeline-marker
+                .timeline-content
+                  .form-row
+                    .col-sm-7
+                      h4.timeline-title 留學心得登載於中大校訊
+                      span.d-block.text-muted 連結：
+                        a(href='/japan-study/ncunews') 點我觀看
+                    a.col-sm-5.mt-2.mt-sm-0(href='/japan-study/ncunews')
+                      .ratio-box(style='padding-bottom:75% /* 480 / 640 * 100% */;')
+                        img.lazyload(data-src='https://imgur.lefty.blog/GohpUGxdUUiYTijIZZKH%2F1608549801132_640x640' alt='中大校訊')
+              li.timeline-item.period.d-flex.flex-column.flex-lg-row
+                .timeline-info
+                .timeline-marker
+                .timeline-content.py-4
+                  .timeline-title.h3.mb-0 2020年｜23歲
+              li.timeline-item.d-flex.flex-column.flex-lg-row
+                .timeline-info.font-weight-bold.mb-1
+                  span 2019年10月
+                .timeline-marker
+                .timeline-content
+                  .form-row
+                    .col-sm-7
+                      h4.timeline-title 留學心得登載於資電院訊
+                      span.d-block.text-muted 連結：
+                        a(href='/japan-study/ceecsnews') 點我觀看
+                    a.col-sm-5.mt-2.mt-sm-0(href='/japan-study/ceecsnews')
+                      .ratio-box(style='padding-bottom:75% /* 480 / 640 * 100% */;')
+                        img.lazyload(data-src='https://imgur.lefty.blog/8vIvtS3AMlgzpbYyXPQi%2F1608626741339_640x640' alt='資電院訊')
+              li.timeline-item.period.d-flex.flex-column.flex-lg-row
+                .timeline-info
+                .timeline-marker
+                .timeline-content.py-4
+                  .timeline-title.h3.mb-0 2019年｜22歲
+              li.timeline-item.d-flex.flex-column.flex-lg-row
+                .timeline-info.font-weight-bold.mb-1
+                  span 2018年12月
+                .timeline-marker
+                .timeline-content
+                  .form-row
+                    .col-sm-7
+                      h4.timeline-title 首次被新聞媒體分享的影片
+                      span.d-block.text-muted 東森新聞：
+                        a(href='https://www.facebook.com/watch/?v=288243885229888' target='_blank' rel='nofollow noreferrer noopener') 點我觀看
+                      span.d-block.text-muted 東森娛樂：
+                        a(href='https://www.facebook.com/watch/?v=275954606440765' target='_blank' rel='nofollow noreferrer noopener') 點我觀看
+                      span.d-block.text-muted 即新聞：
+                        a(href='https://www.facebook.com/watch/?v=328033167793805' target='_blank' rel='nofollow noreferrer noopener') 點我觀看
+                      span.d-block.text-muted ETtoday車雲：
+                        a(href='https://www.facebook.com/watch/?v=2532760750073038' target='_blank' rel='nofollow noreferrer noopener') 點我觀看
+                      span.d-block.text-muted udn走跳世界：
+                        a(href='https://www.facebook.com/watch/?v=778044655879137' target='_blank' rel='nofollow noreferrer noopener') 點我觀看
+                    a.col-sm-5.mt-2.mt-sm-0(href='https://www.facebook.com/watch/?v=288243885229888' target='_blank' rel='nofollow noreferrer noopener')
+                      .ratio-box(style='padding-bottom:100%;')
+                        img.lazyload(data-src='https://upload.wikimedia.org/wikipedia/zh/7/70/51chEBCNewslogo.jpg' alt='東森新聞')
+              li.timeline-item.d-flex.flex-column.flex-lg-row
+                .timeline-info.font-weight-bold.mb-1
+                  span 2018年8月
+                .timeline-marker
+                .timeline-content
+                  .form-row
+                    .col-sm-7
+                      h4.timeline-title 日本台灣交流協會獎學金
+                      span.d-block.text-muted 獎金：48萬日幣
+                      span.d-block.text-muted 證書：
+                        a(href='https://drive.google.com/file/d/1-2tiPsYiBrL4SQrRHlLS_C-ZqEs6O6YL/view?usp=sharing' target='_blank' rel='nofollow noreferrer noopener') 點我觀看
+                    a.col-sm-5.mt-2.mt-sm-0(href='https://drive.google.com/file/d/1-2tiPsYiBrL4SQrRHlLS_C-ZqEs6O6YL/view?usp=sharing' target='_blank' rel='nofollow noreferrer noopener')
+                      .ratio-box(style='padding-bottom:28% /* 161 / 567 * 100% */;')
+                        img.lazyload(data-src='https://www.koryu.or.jp/Portals/0/images/logo/logo.jpg?881' alt='日本台灣交流協會')
+              li.timeline-item.d-flex.flex-column.flex-lg-row
+                .timeline-info.font-weight-bold.mb-1
+                  span 2018年7月
+                .timeline-marker
+                .timeline-content
+                  .form-row
+                    .col-sm-7
+                      h4.timeline-title 聯發科執行長蔡力行先生獎學金
+                      span.d-block.text-muted 獎金：13萬台幣
+                      span.d-block.text-muted 證書：
+                        a(href='https://drive.google.com/file/d/1Q4CSzi441XniIzRdIDcweuduASYtcGXA/view?usp=sharing' target='_blank' rel='nofollow noreferrer noopener') 點我觀看
+                      span.d-block.text-muted 校園新聞：
+                        a(href='http://xn--fiq80yua95u.tw/campus/article/2156' target='_blank' rel='nofollow noreferrer noopener') 點我觀看
+                    a.col-sm-5.mt-2.mt-sm-0(href='http://xn--fiq80yua95u.tw/campus/article/2156' target='_blank' rel='nofollow noreferrer noopener')
+                      .ratio-box(style='padding-bottom:66% /* 332 / 500 * 100% */;')
+                        img.lazyload(data-src='https://www.ncu.edu.tw/assets/thumbs/news/6350af5d5a9b19ce4e7567869b96a80d.jpg' alt='聯發科執行長蔡力行先生獎學金')
+              li.timeline-item.d-flex.flex-column.flex-lg-row
+                .timeline-info.font-weight-bold.mb-1
+                  span 2018年1月
+                .timeline-marker
+                .timeline-content
+                  .form-row
+                    .col-sm-7
+                      h4.timeline-title 日本語能力測驗 N1
+                      span.d-block.text-muted N1 證書：
+                        a(href='https://drive.google.com/file/d/14UrvQTj8WYoHyqxuDLpfMfwCdAeLCYOR/view?usp=sharing' target='_blank' rel='nofollow noreferrer noopener') 點我觀看
+                    a.col-sm-5.mt-2.mt-sm-0(href='https://drive.google.com/file/d/14UrvQTj8WYoHyqxuDLpfMfwCdAeLCYOR/view?usp=sharing' target='_blank' rel='nofollow noreferrer noopener')
+                      .ratio-box(style='padding-bottom:30% /* 113 / 377 * 100% */;')
+                        img.lazyload(data-src='https://www.jlpt.tw/img/logo.png' alt='日本語能力測驗')
+              li.timeline-item.period.d-flex.flex-column.flex-lg-row
+                .timeline-info
+                .timeline-marker
+                .timeline-content.py-4
+                  .timeline-title.h3.mb-0 2018年｜21歲
+              li.timeline-item.d-flex.flex-column.flex-lg-row
+                .timeline-info.font-weight-bold.mb-1
+                  span 2017年8月
+                .timeline-marker
+                .timeline-content
+                  .form-row
+                    .col-sm-7
+                      h4.timeline-title 日本語能力測驗 N2、N3
+                      span.d-block.text-muted N2 證書：
+                        a(href='https://drive.google.com/file/d/145Agy_UcH--DxMD0uh1-vUJukqO2Vj4m/view?usp=sharing' target='_blank' rel='nofollow noreferrer noopener') 點我觀看
+                      span.d-block.text-muted N3 證書：
+                        a(href='https://drive.google.com/file/d/1wyDABtmdsGQrFfRV_b0_IHGGOqM-_tri/view?usp=sharing' target='_blank' rel='nofollow noreferrer noopener') 點我觀看
+                    a.col-sm-5.mt-2.mt-sm-0(href='https://drive.google.com/file/d/145Agy_UcH--DxMD0uh1-vUJukqO2Vj4m/view?usp=sharing' target='_blank' rel='nofollow noreferrer noopener')
+                      .ratio-box(style='padding-bottom:30% /* 113 / 377 * 100% */;')
+                        img.lazyload(data-src='https://www.jlpt.tw/img/logo.png' alt='日本語能力測驗')
+              li.timeline-item.period.d-flex.flex-column.flex-lg-row
+                .timeline-info
+                .timeline-marker
+                .timeline-content.py-4
+                  .timeline-title.h3.mb-0 2017年｜20歲
+              li.timeline-item.d-flex.flex-column.flex-lg-row
+                .timeline-info.font-weight-bold.mb-1
+                  span 高中
+                .timeline-marker
+                .timeline-content
+                  .form-row
+                    .col-sm-7
+                      h4.timeline-title 畢業歌（市立大同）
+                      span.d-block.text-muted I'm the 鼓手！though, 這首很簡單：
+                        a(href='https://www.youtube.com/watch?v=AyOXUgTtSrM' target='_blank' rel='noreferrer noopener') 點我觀看
+                    a.col-sm-5.mt-2.mt-sm-0(href='https://www.youtube.com/watch?v=AyOXUgTtSrM' target='_blank' rel='noreferrer noopener')
+                      .ratio-box(style='padding-bottom:56.25% /* 720 / 1280 * 100% */;')
+                        img.lazyload(data-src='https://i3.ytimg.com/vi/AyOXUgTtSrM/maxresdefault.jpg' alt='畢業歌影片封面')
+              li.timeline-item.d-flex.flex-column.flex-lg-row
+                .timeline-info.font-weight-bold.mb-1
+                  span 國中
+                .timeline-marker
+                .timeline-content
+                  .form-row
+                    .col-sm-7
+                      h4.timeline-title 議長獎（東湖國中）
+                      span.d-block.text-muted 獎狀：
+                        a(href='https://drive.google.com/file/d/1b3dr9_KFxCYaHP8SL_tNsBvVBx6GKPkB/view?usp=sharing' target='_blank' rel='nofollow noreferrer noopener') 點我觀看
+                    a.col-sm-5.mt-2.mt-sm-0(href='https://drive.google.com/file/d/1b3dr9_KFxCYaHP8SL_tNsBvVBx6GKPkB/view?usp=sharing' target='_blank' rel='nofollow noreferrer noopener')
+                      .ratio-box(style='padding-bottom:75%;')
+                        img.lazyload(data-src='https://i.imgur.com/Mz3E2SD.jpg' alt='議長獎獎狀')
+              li.timeline-item.d-flex.flex-column.flex-lg-row
+                .timeline-info.font-weight-bold.mb-1
+                  span 國小
+                .timeline-marker
+                .timeline-content
+                  .form-row
+                    .col-sm-7
+                      h4.timeline-title 縣長獎（金龍國小）
+                      span.d-block.text-muted 拿去護貝時不見了，只剩框🤣：
+                        a(href='https://drive.google.com/file/d/1rpPmmSDBNEzwe4SUtu3PYFFoxLn18g2c/view?usp=sharing' target='_blank' rel='nofollow noreferrer noopener') 點我觀看
+                    a.col-sm-5.mt-2.mt-sm-0(href='https://drive.google.com/file/d/1rpPmmSDBNEzwe4SUtu3PYFFoxLn18g2c/view?usp=sharing' target='_blank' rel='nofollow noreferrer noopener')
+                      .ratio-box(style='padding-bottom:75%;')
+                        img.lazyload(data-src='https://i.imgur.com/3VcAhI9.jpg' alt='只剩框的縣長獎')
+              li.timeline-item.d-flex.flex-column.flex-lg-row
+                .timeline-info.font-weight-bold.mb-1
+                  span 國小
+                .timeline-marker
+                .timeline-content
+                  .form-row
+                    .col-sm-7
+                      h4.timeline-title 第一屆體育班棒球隊隊長（金龍少棒）
+                      span.d-block.text-muted 比賽頒獎照片：
+                        a(href='https://drive.google.com/file/d/1Ilwcxuzvpl3j6QV6BqcmNv5tzZbEeBqk/view?usp=sharing' target='_blank' rel='nofollow noreferrer noopener') 點我觀看
+                    a.col-sm-5.mt-2.mt-sm-0(href='https://drive.google.com/file/d/1Ilwcxuzvpl3j6QV6BqcmNv5tzZbEeBqk/view?usp=sharing' target='_blank' rel='nofollow noreferrer noopener')
+                      .ratio-box(style='padding-bottom:75% /* 482 / 642 * 100% */;')
+                        img.lazyload(data-src='https://i.imgur.com/qplRm1v.jpg' alt='棒球比賽頒獎照片')
+              li.timeline-item.period.d-flex.flex-column.flex-lg-row
+                .timeline-info
+                .timeline-marker
+                .timeline-content.py-4
+                  .timeline-title.h3.mb-0 國小～高中
+          #education.tab-pane.fade.px-2.pt-5
+            ul.timeline-centered
+              li.timeline-item.d-flex.flex-column.flex-lg-row
+                .timeline-info.font-weight-bold.mb-1
+                  span 2019年9月
+                .timeline-marker
+                .timeline-content
+                  .form-row
+                    .col-sm-7
+                      h4.timeline-title 國立中央大學 - 畢業
+                      span.d-block.text-muted 科系：資訊工程學系
+                      span.d-block.text-muted GPA：
+                        a(href='https://drive.google.com/file/d/165NBLWrPfrRaGcxLcBzRbWMaDeTeQFV1/view?usp=sharing' target='_blank' rel='nofollow noreferrer noopener') 3.7
+                      span.d-block.text-muted 畢業系排：
+                        a(href='https://drive.google.com/file/d/1h5wA3kA8PcyPBYtlQMO4PmOsC9s4Q8Fc/view?usp=sharing' target='_blank' rel='nofollow noreferrer noopener') 16%
+                      span.d-block.text-muted 畢業證書：
+                        a(href='https://drive.google.com/file/d/1w-QkvsXQ2fe_lkmpQ2QkyZ46MTVvwGOj/view?usp=sharing' target='_blank' rel='nofollow noreferrer noopener') 點我觀看
+                      span.d-block.text-muted 歷年成績單：
+                        a(href='https://drive.google.com/file/d/165NBLWrPfrRaGcxLcBzRbWMaDeTeQFV1/view?usp=sharing' target='_blank' rel='nofollow noreferrer noopener') 點我觀看
+                      span.d-block.text-muted 名次證明書： 
+                        a(href='https://drive.google.com/file/d/1h5wA3kA8PcyPBYtlQMO4PmOsC9s4Q8Fc/view?usp=sharing' target='_blank' rel='nofollow noreferrer noopener') 點我觀看
+              li.timeline-item.d-flex.flex-column.flex-lg-row
+                .timeline-info.font-weight-bold.mb-1
+                  span 2019年8月
+                .timeline-marker
+                .timeline-content
+                  .form-row
+                    .col-sm-7
+                      h4.timeline-title 大阪市立大學 - 留學終
+                      span.d-block.text-muted 科系：資訊工程學系
+                      span.d-block.text-muted 入學許可書：
+                        a(href='https://drive.google.com/file/d/1ns11WFvMZ7RPCMJCHEn6-Vnr3Wxn8R8N/view?usp=sharing' target='_blank' rel='nofollow noreferrer noopener') 點我觀看
+                      span.d-block.text-muted 年度成績單：
+                        a(href='https://drive.google.com/file/d/11TReb_pAI_tvJ17ub4QagHItblR-N7f3/view?usp=sharing' target='_blank' rel='nofollow noreferrer noopener') 點我觀看
+              li.timeline-item.period.d-flex.flex-column.flex-lg-row
+                .timeline-info
+                .timeline-marker
+                .timeline-content.py-4
+                  .timeline-title.h3.mb-0 2019年｜22歲
+              li.timeline-item.d-flex.flex-column.flex-lg-row
+                .timeline-info.font-weight-bold.mb-1
+                  span 2018年2月
+                .timeline-marker
+                .timeline-content
+                  .form-row
+                    .col-sm-7
+                      h4.timeline-title 廣島大學日本語・日本文化特別研修
+                      span.d-block.text-muted 證書：
+                        a(href='https://drive.google.com/file/d/1I19GCT_oBrWCutWzPttsbl-mI3L7zPzZ/view?usp=sharing' target='_blank' rel='nofollow noreferrer noopener') 點我觀看
+              li.timeline-item.period.d-flex.flex-column.flex-lg-row
+                .timeline-info
+                .timeline-marker
+                .timeline-content.py-4
+                  .timeline-title.h3.mb-0 2018年｜21歲
+              li.timeline-item.d-flex.flex-column.flex-lg-row
+                .timeline-info.font-weight-bold.mb-1
+                  span 2016年6月
+                .timeline-marker
+                .timeline-content
+                  .form-row
+                    .col-sm-7
+                      h4.timeline-title JAVA 大一專題
+                      span.d-block.text-muted 名稱：Beats 音樂節奏遊戲
+                      span.d-block.text-muted 班排：2
+                      span.d-block.text-muted demo 影片：
+                        a(href='https://www.youtube.com/watch?v=0Q27u7pq0Co' target='_blank' rel='noreferrer noopener') 點我觀看
+                    a.col-sm-5.mt-2.mt-sm-0(href='https://www.youtube.com/watch?v=0Q27u7pq0Co' target='_blank' rel='noreferrer noopener')
+                      .ratio-box(style='padding-bottom:56.25% /* 720 / 1280 * 100% */;')
+                        img.lazyload(data-src='https://i3.ytimg.com/vi/0Q27u7pq0Co/maxresdefault.jpg' alt='JAVA 專題影片封面')
+              li.timeline-item.period.d-flex.flex-column.flex-lg-row
+                .timeline-info
+                .timeline-marker
+                .timeline-content.py-4
+                  .timeline-title.h3.mb-0 2016年｜19歲
+          #speech.tab-pane.fade.px-2.pt-5
+            ul.timeline-centered
+              li.timeline-item.d-flex.flex-column.flex-lg-row
+                .timeline-info.font-weight-bold.mb-1
+                  span 2021年3月
+                .timeline-marker
+                .timeline-content
+                  .form-row
+                    .col-sm-7
+                      h4.timeline-title 交換生分享會
+                    a.col-sm-5.mt-2.mt-sm-0(href='/japan-study/sharing-session')
+                      .ratio-box(style='padding-bottom:100% /* 426 / 640 * 100% */;')
+                        img.lazyload(data-src='https://imgur.lefty.blog/2Wh1R2G6GIDlWsRfKckQ%2F1616660170077_640x640' alt='交換生分享會')
+              li.timeline-item.period.d-flex.flex-column.flex-lg-row
+                .timeline-info
+                .timeline-marker
+                .timeline-content.py-4
+                  .timeline-title.h3.mb-0 2021年｜24歲
+              li.timeline-item.d-flex.flex-column.flex-lg-row
+                .timeline-info.font-weight-bold.mb-1
+                  span 2019年10月
+                .timeline-marker
+                .timeline-content
+                  .form-row
+                    .col-sm-7
+                      h4.timeline-title 親師座談會
+                    a.col-sm-5.mt-2.mt-sm-0(href='/japan-study/parental-seminar')
+                      .ratio-box(style='padding-bottom:66.6% /* 426 / 640 * 100% */;')
+                        img.lazyload(data-src='https://imgur.lefty.blog/zpWH2qOl1XavwmAhoalD%2F1608032476699_640x640' alt='親師座談會')
+              li.timeline-item.d-flex.flex-column.flex-lg-row
+                .timeline-info.font-weight-bold.mb-1
+                  span 2019年10月
+                .timeline-marker
+                .timeline-content
+                  .form-row
+                    .col-sm-7
+                      h4.timeline-title 系上分享會（第二屆）
+                    a.col-sm-5.mt-2.mt-sm-0(href='https://drive.google.com/file/d/1P5U1TCIiKU8Y2bjDwueRm8kksUhI64AB/view?usp=sharing' target='_blank' rel='nofollow noreferrer noopener')
+                      .ratio-box(style='padding-bottom:66.6% /* 400 / 600 * 100% */;')
+                        img.lazyload(data-src='https://i.imgur.com/PJLIiDo.jpg' alt='系上分享會（第二屆）')
+              li.timeline-item.d-flex.flex-column.flex-lg-row
+                .timeline-info.font-weight-bold.mb-1
+                  span 2019年9月
+                .timeline-marker
+                .timeline-content
+                  .form-row
+                    .col-sm-7
+                      h4.timeline-title 獎學金分享會
+                    a.col-sm-5.mt-2.mt-sm-0(href='/japan-study/scholarship-sharing-session')
+                      .ratio-box(style='padding-bottom:75% /* 480 / 640 * 100% */;')
+                        img.lazyload(data-src='https://imgur.lefty.blog/WK5MfWwpudPigidT5jCq%2F1608294023384_640x640' alt='獎學金分享會')
+              li.timeline-item.d-flex.flex-column.flex-lg-row
+                .timeline-info.font-weight-bold.mb-1
+                  span 2019年6月
+                .timeline-marker
+                .timeline-content
+                  .form-row
+                    .col-sm-7
+                      h4.timeline-title 系上分享會（第一屆）
+              li.timeline-item.period.d-flex.flex-column.flex-lg-row
+                .timeline-info
+                .timeline-marker
+                .timeline-content.py-4
+                  .timeline-title.h3.mb-0 2019年｜22歲
+              li.timeline-item.d-flex.flex-column.flex-lg-row
+                .timeline-info.font-weight-bold.mb-1
+                  span 2018年10月
+                .timeline-marker
+                .timeline-content
+                  .form-row
+                    .col-sm-7
+                      h4.timeline-title 廣大研修分享會
+                    a.col-sm-5.mt-2.mt-sm-0(href='/japan-study/hirodai-japanese-culture-sharing-session')
+                      .ratio-box(style='padding-bottom:56% /* 337 / 600 * 100% */;')
+                        img.lazyload(data-src='https://imgur.lefty.blog/FZIjVz68kXGOQUmfvuaI%2F1620177925063_640x640' alt='廣大研修分享會')
+              li.timeline-item.period.d-flex.flex-column.flex-lg-row
+                .timeline-info
+                .timeline-marker
+                .timeline-content.py-4
+                  .timeline-title.h3.mb-0 2018年｜21歲
+          #work.tab-pane.fade.px-2.pt-5
+            ul.timeline-centered
+              li.timeline-item.d-flex.flex-column.flex-lg-row
+                .timeline-info.font-weight-bold.mb-1
+                  span 2018年9月
+                .timeline-marker
+                .timeline-content
+                  .form-row
+                    .col-sm-7
+                      h4.timeline-title 左撇子のGen - 油土伯
+                      span.d-block.text-muted YouTube：
+                        a(href='https://www.youtube.com/c/lefthanded_gen' target='_blank' rel='noreferrer noopener') 點我觀看
+                      span.d-block.text-muted Facebook：
+                        a(href='https://www.facebook.com/lefthanded.gen/' target='_blank' rel='noreferrer noopener') 點我觀看
+                      span.d-block.text-muted Instagram：
+                        a(href='https://www.instagram.com/lefthanded.gen/' target='_blank' rel='noreferrer noopener') 點我觀看
+              li.timeline-item.period.d-flex.flex-column.flex-lg-row
+                .timeline-info
+                .timeline-marker
+                .timeline-content.py-4
+                  .timeline-title.h3.mb-0 2018年｜21歲
+          .d-block.text-center
+            a.btn.btn-outline-primary(href='#resume__option') 回到上方

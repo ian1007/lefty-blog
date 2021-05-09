@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /.well-known/amphtml/apikey.pub
+
+Sitemap: https://lefty.blog/sitemap.xml

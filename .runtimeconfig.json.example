@@ -1,0 +1,28 @@
+{
+  "service": {
+    "client_email": "",
+    "auth_provider_x509_cert_url": "",
+    "api_key": "",
+    "client_x509_cert_url": "",
+    "database_url": "",
+    "client_id": "",
+    "token_uri": "",
+    "auth_uri": "",
+    "meaurement_id": "",
+    "messaging_sender_id": "",
+    "private_key": "",
+    "private_key_id": "",
+    "auth_domain": "",
+    "storage_bucket": "",
+    "project_id": "",
+    "app_id": ""
+  },
+  "nodemailer": {
+    "pass": "",
+    "user": ""
+  },
+  "algolia": {
+    "appid": "",
+    "apikey": ""
+  }
+}
