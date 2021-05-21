@@ -180,7 +180,7 @@ router.get('/search', csrfProtection, (req, res, next) => {
 router.get('/about-me', (req, res) => {
   res.render('admin/admin_aboutme', {
     blogger,
-    title: '關於我' + blogger.titleDash + blogger.author,
+    title: '黃彥瑜' + blogger.titleDash + blogger.author,
     description: description.aboutme,
     path: blogger.domain + 'about-me',
     featuredImage: blogger.imageUrl,

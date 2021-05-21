@@ -16,15 +16,15 @@ amp-sidebar.modal(id='sidebar' layout='nodisplay' side='left')
       li.nav-item
         a.nav-link.d-flex.align-items-center(href='/about-me' rel='author')
           span.navbar__icon.icon__aboutme--black.mx-4
-          span 關於我
+          span 關於
       li.nav-item
         a.nav-link.d-flex.align-items-center(href='/categories')
           span.navbar__icon.icon__categories--black.mx-4
-          span 所有主題
+          span 主題
       li.nav-item
         a.nav-link.d-flex.align-items-center(href='/donate')
           span.navbar__icon.icon__donate--black.mx-4
-          span 自由樂捐
+          span 贊助
     .promote.p-4
       a.d-block(href='/')
         amp-img.rounded-lg(src='/carousel/carousel-2_20210407.jpg' width='2160' height='1080' layout='responsive')
@@ -38,7 +38,7 @@ amp-lightbox.dialog(id='search-lightbox' layout='nodisplay')
         input#form__search.form-control.py-0(type='search' name='query' placeholder='找找看...' autocomplete='off' value='')
       #search__result
     .dialog__categories.px-4
-      span.d-block.font-weight-bold.mb-3 所有主題
+      span.d-block.font-weight-bold.mb-3 主題
       -for(categoriesDoc in categories)
         a.d-flex.align-items-center.rounded-lg.p-3.my-3(href='/categories/' + categories[categoriesDoc].path)
           amp-img.rounded-circle(src=categories[categoriesDoc].thumbnail||blogger.othersThumbnail alt=categories[categoriesDoc].name width='30' height='30' layout='fixed')

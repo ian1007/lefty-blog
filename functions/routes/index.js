@@ -163,7 +163,7 @@ router.get('/about-me', (req, res) => {
   res.set('Cache-Control', 'public, max-age=3600, s-maxage=86400');
   res.render('aboutme', {
     blogger,
-    title: '關於我' + blogger.titleDash + blogger.author,
+    title: '黃彥瑜' + blogger.titleDash + blogger.author,
     description: description.aboutme,
     path: blogger.domain + 'about-me',
     featuredImage: blogger.imageUrl,

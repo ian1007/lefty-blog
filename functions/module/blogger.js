@@ -19,7 +19,7 @@ const blogger = {
   algoliaIndexDraft: 'lefty.blog - draft',
   algoliaAppID: 'Q8O3B2C1H1',
   algoliaSearchAPIKey: '9167dc8dcf554a5acaba8184337f41c3',
-  perpage: 10
+  perpage: 20
 }
 
 exports.blogger = blogger;

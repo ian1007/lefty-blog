@@ -72,11 +72,13 @@ $(function () {
         }
       });
 
+      const submitButton = document.querySelector('#postEditor button');
       // validate
       // 1. 防止表單在驗證之前傳送
       const form = document.querySelector('form#main-content');
       form.addEventListener('submit', function (e) {
         e.preventDefault();
+        submitButton.disabled = true;
         // 送出時不會啟動 beforeunload 的提示
         submitting = true;
         handleFormSubmit(form);
@@ -116,6 +118,7 @@ $(function () {
             submitting = false;
             if (submit) {
               $('#postEditor button').html('發佈');
+              submitButton.disabled = false;
             }
           } else if (res === '沒有重複') {
             // 是透過 2. 監聽進來的
@@ -140,9 +143,8 @@ $(function () {
                 });
                 // 恢復 beforeunload 的提示
                 submitting = false;
-                if (submit) {
-                  $('#postEditor button').html('發佈');
-                }
+                $('#postEditor button').html('發佈');
+                submitButton.disabled = false;
               }
               else {
                 _.find($('textarea.editor'), function (input) {

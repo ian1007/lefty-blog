@@ -2,10 +2,17 @@
   .card-body.px-sm-0.px-lg-4.pt-3
     .d-flex.align-items-center.mb-4
       h3.h4.ml-3.mb-0.font-weight-bold.card__title__hightlightNoIcon--lg Hi! 我是黃彥瑜
-    a.ratio-box.mb-3(href='/admin/about-me' title='左撇子のGen' rel='author' style='padding-bottom: 100%;')
+    a.ratio-box.mb-4(href='/admin/about-me' title='左撇子のGen' rel='author' style='padding-bottom: 100%;')
       picture
         source(data-srcset='/about-me/左撇子のGen_20201127.webp' type='image/webp')
-        img.rounded-sm.lazyload(data-src='/about-me/左撇子のGen_20201127.jpg' alt='左撇子のGen')
+        img.lazyload(data-src='/about-me/左撇子のGen_20201127.jpg' alt='左撇子のGen')
+    p.sidebar__profile__intro.h6.mb-3 嗨！我是彥瑜，人生體驗很多元。對於日本文化、網路行銷、親子關係都有許多想法。
+    p.sidebar__profile__intro.h6.mb-3 目前致力於提供企業與個人客製化的網頁，以及行銷顧問服務，詳細請參考
+      a(href='/admin/about-me') 我的服務
+      | 。
+    p.sidebar__profile__intro.h6.mb-3 更多我的故事，歡迎參考
+      a(href='/admin/about-me' rel='author') 關於我
+      | 。
     button.d-flex.flex-column.w-100.border-0.p-2(type='button')
       .d-flex.align-items-center
         span.icon--size.icon__job--gray
@@ -75,11 +82,9 @@
         span.h6.mb-0.ml-3.text-left Contact Me
       .collapse
         span.text-left.text-muted Email:
-          | 
-          a(href='mailto:lefthanded.gen@gmail.com') lefthanded.gen@gmail.com
+        aa.sidebar__profile__contact.text-left(href='mailto:lefthanded.gen@gmail.com') lefthanded.gen@gmail.com
         span.text-left.text-muted LINE ID:
-          | 
-          a(href='https://line.me/ti/p/doWod14l-C' target='_blank' rel='noreferrer noopener') raisondetrehyy
+        aa.sidebar__profile__contact.text-left(href='https://line.me/ti/p/doWod14l-C' target='_blank' rel='noreferrer noopener') raisondetrehyy
 .sidebar__youtube.card
   .card-body.px-sm-0.px-lg-4.pt-3
     .d-flex.align-items-center.mb-4
@@ -109,7 +114,7 @@
 .sidebar__categories.card
   .card-body.px-sm-0.px-lg-4.pt-3
     .d-flex.align-items-center.mb-4
-      h3.h4.ml-3.mb-0.font-weight-bold.card__title__hightlightNoIcon--lg 所有主題
+      h3.h4.ml-3.mb-0.font-weight-bold.card__title__hightlightNoIcon--lg 主題
     -for(categoriesDoc in categories)
       a.d-flex.align-items-center.rounded-sm.w-100.p-3(href='/admin/categories/' + categories[categoriesDoc].path)
         img.card__title__icon--lg.rounded-circle.lazyload(data-src=categories[categoriesDoc].thumbnail||blogger.othersThumbnail alt=categories[categoriesDoc].name)
@@ -120,7 +125,7 @@
 .sidebar__donate.card
   .card-body.px-sm-0.px-lg-4.pt-3
     .d-flex.align-items-center.mb-4
-      h3.h4.ml-3.mb-0.font-weight-bold.card__title__hightlightNoIcon--lg 自由樂捐
+      h3.h4.ml-3.mb-0.font-weight-bold.card__title__hightlightNoIcon--lg 贊助
     a.d-flex.align-items-center.rounded-sm.w-100.p-3(href='/admin/donate')
       span.icon--size--lg.icon__donate
       span.h6.mb-0.ml-3 自由樂捐
@@ -128,20 +133,22 @@
   .card-body.px-sm-0.px-lg-4.pt-3
     .d-flex.align-items-center.mb-4
       h3.h4.ml-3.mb-0.font-weight-bold.card__title__hightlightNoIcon--lg 訂閱電子報
-    .card.subscribe__description
-      p.mb-2 哈囉！喜歡左撇子のGen的內容嗎？訂閱後，你將會收到：
+    .subscribe__description
+      p.mb-2 哈囉！喜歡我的內容嗎？訂閱後，你將可以收到：
       ul.mb-0
         li.py-1.my-1 ✔︎ How家庭 最新內容
         li.py-1.my-1 ✔︎ 創業心路 最新內容
         li.py-1.my-1 ✔︎ 線下活動資訊
       span#subscribed.h5.text-center.my-5.d-none 恭喜你，訂閱成功囉
+      span#subscribeError.h5.text-center.my-5.d-none 哎呀！系統出錯了，請回報這個問題，謝謝你
       form#subscribe.mt-3(action='/subscribe' method='POST' autocomplete='off')
         .form-group
-          input#subscriber.form-control(type='text' name='subscriber' placeholder='Name' spellcheck='false' onkeydown="return event.key != 'Enter';")
+          input#subscriber.form-control(type='text' name='subscriber' placeholder='你的名字' spellcheck='false' onkeydown="return event.key != 'Enter';")
           .messages
         .form-group
-          input#email.form-control(type='email' name='email' placeholder='Email' spellcheck='false' onkeydown="return event.key != 'Enter';")
+          input#email.form-control(type='email' name='email' placeholder='你的信箱' spellcheck='false' onkeydown="return event.key != 'Enter';")
           .messages
         button.btn.btn-secondary.ml-auto.d-flex.align-items-center(type='submit')
           span.btn__icon.icon__subscribe--white
           span.ml-2 免費訂閱
+        small.d-block.mt-2 不喜歡時，隨時都可以取消訂閱哦

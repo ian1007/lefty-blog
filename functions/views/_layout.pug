@@ -22,7 +22,7 @@ html(lang='zh-Hant-TW')
     meta(property='og:locale' content='zh_tw')
     block sharing
     meta(name='twitter:card' content='summary')
-    link(rel='stylesheet' href='/all_20210520.css')
+    link(rel='stylesheet' href='/all_20210521.css')
     if csrfToken
       meta(name='csrf-token' content=csrfToken)
     block head
@@ -33,10 +33,29 @@ html(lang='zh-Hant-TW')
       gtag('js', new Date());
       gtag('config', 'G-TEEC7Y2KWE');
   body
+    #fb-root
+    #fb-customer-chat.fb-customerchat
+    script.
+      var chatbox = document.getElementById('fb-customer-chat');
+      chatbox.setAttribute('page_id', '275473716420240');
+      chatbox.setAttribute('attribution', 'biz_inbox');
+      window.fbAsyncInit = function() {
+        FB.init({
+          xfbml            : true,
+          version          : 'v10.0'
+        });
+      };
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/zh_TW/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
     block pre_scripts
     include partials/_navbar.pug
     block content
     include partials/_footer.pug
-    script(src='/vendor_20210520.js')
-    script(src='/all_20210520.js')
+    script(src='/vendor_20210521.js')
+    script(src='/all_20210521.js')
     block scripts

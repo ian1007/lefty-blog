@@ -30,11 +30,13 @@ $(function () {
 
       let allpass = true;
       const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+      const submitButton = document.querySelector('.sidebar__subscribe button');
       // validate
       // 1. 防止表單在驗證之前傳送
       const form = document.querySelector('form#subscribe');
       form.addEventListener('submit', function (e) {
         e.preventDefault();
+        submitButton.disabled = true;
         allpass = true;
         handleFormSubmit(form);
         if (allpass) {
@@ -55,7 +57,13 @@ $(function () {
           }).done(function () {
             form.remove();
             $('span#subscribed').removeClass('d-none');
+          }).fail(function() {
+            form.remove();
+            $('span#subscribeError').removeClass('d-none');
           });
+        }
+        else {
+          submitButton.disabled = false;
         }
       });
 
