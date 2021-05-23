@@ -187,6 +187,17 @@ router.get('/about-me', (req, res) => {
     moment
   });
 });
+router.get('/service', csrfProtection, (req, res) => {
+  res.render('admin/admin_service', {
+    blogger,
+    title: '左撇子網路科技' + blogger.titleDash + blogger.author,
+    description: description.service,
+    path: blogger.domain + 'service',
+    featuredImage: blogger.imageUrl,
+    moment,
+    csrfToken: req.csrfToken()
+  });
+});
 router.get('/donate', (req, res) => {
   res.render('admin/admin_donate', {
     blogger,

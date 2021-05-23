@@ -80,6 +80,7 @@
       width: fit-content;
     }
   }
+  .sidebar__service,
   .sidebar__categories,
   .sidebar__donate {
     a {
@@ -94,11 +95,12 @@
     .subscribe__description {
       padding: 0.75rem 1rem;
       font-weight: 500;
+      font-size: 1rem;
       ul li {
         border-bottom: thin dashed darken($primary, 15%);
         color: darken($primary, 15%);
       }
-      span.h5 {
+      span.h6 {
         font-weight: inherit;
         color: darken($primary, 15%);
         line-height: $line-height-base;
@@ -118,6 +120,7 @@
     .sidebar__profile a:hover {
       text-decoration: underline;
     }
+    .sidebar__service,
     .sidebar__categories,
     .sidebar__donate {
       a:hover {

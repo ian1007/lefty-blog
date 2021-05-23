@@ -9,26 +9,19 @@ block pre_scripts
 
 block content
   main#aboutme.container-fluid.container__fixedNavbar--margin
-    .aboutme__profile.pt-5.pb-3
-      .container.p-4
-        .d-flex.flex-column.align-items-center
-          .profile__image.shadow.mb-3
-            picture.ratio-box(style='padding-bottom: 100%;')
-              source(data-srcset='/about-me/左撇子のGen_20201127.webp' type='image/webp')
-              img.rounded-sm.lazyload(data-src='/about-me/左撇子のGen_20201127.jpg' alt='左撇子のGen')
-          h1.h2.mb-3.font-weight-bold 黃彥瑜
-          button.d-flex.flex-column.align-items-center.border-0.px-3(type='button')
-            span.icon--size.icon__contact.mb-3
-            .collapse
-              span.h6.text-muted Email:
-                | 
-                a(href='mailto:lefthanded.gen@gmail.com') lefthanded.gen@gmail.com
-              span.h6.text-muted LINE ID:
-                | 
-                a(href='https://line.me/ti/p/doWod14l-C' target='_blank' rel='noreferrer noopener') raisondetrehyy
+    #parallaxScrolling.aboutme__profile.pt-5.pb-3.pb-lg-5
+      .container.p-4.d-flex.flex-column.align-items-center.flex-lg-row
+        .profile__image.mb-4.mb-lg-0.mx-lg-5
+          picture.ratio-box(style='padding-bottom: 100%;')
+            source(data-srcset='/about-me/左撇子のGen_20201127.webp' type='image/webp')
+            img.shadow.lazyload(data-src='/about-me/左撇子のGen_20201127.jpg' alt='左撇子のGen')
+        .d-flex.flex-column.align-items-center.align-items-lg-start
+          h1.h2.mb-3.font-weight-bold.mr-lg-5 嗨～我是彥瑜 😄
+          p.mr-lg-5.d-none.d-lg-block 人生體驗很多元～在日本留學時拍了一些 YouTube 影片，從此開始經營個人品牌。目前致力於提供企業與個人客製化的網頁，以及行銷顧問服務。
+          p.mr-lg-5.mb-0.d-none.d-lg-block 但比起面對電腦，我更喜歡面對人群！所以我開始實踐我人生最有想法的主題，也就是「家庭」～我希望透過 How家庭 這個理念認識到更多人，並且帶給他們好的影響～
     .aboutme__values.py-5
       .container.px-4
-        h2.h5.mb-0.text-center.font-weight-bold.py-3 我問我答
+        h2.h5.mb-0.text-center.font-weight-bold.py-3 關於我
         #aboutme__question.carousel.slide.d-flex.flex-wrap.flex-sm-nowrap.py-4(data-ride='carousel' data-interval='false')
           .carousel-inner.px-sm-3.px-lg-5.order-sm-1
             .carousel-item.d-table-cell.active
@@ -108,7 +101,7 @@ block content
                 .timeline-content
                   .form-row
                     .col-sm-7
-                      h4.timeline-title 留學心得登載於資電院刊
+                      h4.timeline-title 留學心得登載於資電院訊
                       span.d-block.text-muted 連結：
                         a(href='/admin/japan-study/ceecsnews') 點我觀看
                     a.col-sm-5.mt-2.mt-sm-0(href='/admin/japan-study/ceecsnews')

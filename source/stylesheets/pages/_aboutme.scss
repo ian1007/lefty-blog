@@ -9,7 +9,7 @@
       width: 100%;
       height: 100vh;
       z-index: -10;
-      background: url("/about-me/about-me_20201127.png") no-repeat center center;
+      background: url("/about-me/about-me_20210522.png") no-repeat center center;
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
@@ -17,8 +17,9 @@
     }
     .profile__image {
       width: 250px;
+      min-width: 250px;
       img {
-        border: thick solid $white;
+        border-radius: 1.5rem;
       }
     }
     button {

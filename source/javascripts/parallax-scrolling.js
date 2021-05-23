@@ -1,7 +1,7 @@
 'use strict';
 
 $(function () {
-  if (document.body.contains(document.querySelector('#aboutme'))) {
+  if (document.body.contains(document.querySelector('#parallaxScrolling'))) {
     $.fn.isInViewport = function () {
       const elementTop = $(this).offset().top;
       const elementBottom = elementTop + $(this).outerHeight();
@@ -13,11 +13,11 @@ $(function () {
     };
 
     $(window).on('resize scroll', function () {
-      if ($('.aboutme__profile').isInViewport() && $('.aboutme__profile').hasClass('invisible')) {
-        $('.aboutme__profile').removeClass('invisible');
+      if ($('#parallaxScrolling').isInViewport() && $('#parallaxScrolling').hasClass('invisible')) {
+        $('#parallaxScrolling').removeClass('invisible');
       } 
-      else if (!$('.aboutme__profile').isInViewport() && !$('.aboutme__profile').hasClass('invisible'))  {
-        $('.aboutme__profile').addClass('invisible');
+      else if (!$('#parallaxScrolling').isInViewport() && !$('#parallaxScrolling').hasClass('invisible'))  {
+        $('#parallaxScrolling').addClass('invisible');
       }
     });
   }

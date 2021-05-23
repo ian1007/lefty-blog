@@ -1,0 +1,133 @@
+extends _layout.pug
+
+block sharing
+  meta(property='og:type' content='website')
+
+block head
+  script(type='application/ld+json').
+    [{"@context":"https://schema.org","@type":"WebSite","url":"#{blogger.domain}","potentialAction":{"@type":"SearchAction","target":"#{blogger.domain}search?query={search_term_string}","query-input":"required name=search_term_string"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"#{blogger.domain}","name":"#{blogger.author}"}},{"@type":"ListItem","position":2,"item":{"@id":"#{path}","name":"左撇子網路科技"}}]},{"@context":"https://schema.org","@type":"Organization","url":"#{blogger.domain}","logo":"#{blogger.domain}organization.png"}]
+
+block pre_scripts
+
+block content
+  main#service.container-fluid.container__fixedNavbar--margin
+    #parallaxScrolling.service__intro.pt-5.pb-3.pb-lg-5
+      .container.p-4.d-flex.flex-column.align-items-center.flex-lg-row
+        .intro__image.mb-4.mb-lg-0.mx-lg-5
+          picture.ratio-box(style='padding-bottom: 100%;')
+            source(data-srcset='/about-me/左撇子のGen_20201127.webp' type='image/webp')
+            img.shadow.lazyload(data-src='/about-me/左撇子のGen_20201127.jpg' alt='左撇子のGen')
+        .intro__content.d-flex.flex-column.align-items-center.align-items-lg-start
+          img.lazyload.mb-3(data-src='/icon/logo.svg' alt='左撇子網路科技')
+          p.mr-lg-5.d-none.d-lg-block 我一向喜歡精美的事物，這反應到了我的作品上 : )
+          p.mr-lg-5.mb-0.d-none.d-lg-block 我也了解網頁設計的目的不僅僅是為了形象，更重要的是讓客戶看到，並轉換成實際的價值！所以我也提供廣告行銷的服務。當然，平面設計也能讓你的品牌更上一層樓！
+    #website.service__website.pt-5
+      .container.p-4.d-flex.flex-column.align-items-center
+        .d-flex.justify-content-center.mb-4
+          h2.h2.mb-0.font-weight-bold.service__title__hightlight 網站架設
+        .row 
+          .website__item.col-lg-6.py-5.d-flex.flex-column.flex-sm-row.align-items-center.animatable.fadeInUp
+            .item__icon.d-flex.flex-column.align-items-center.rounded-circle.mb-4.mb-sm-0.mr-sm-5
+              img(src='/service/website-rwd.svg')
+              h3.mb-0 RWD網頁技術
+            p.mb-0.mt-3.mt-sm-0 手機、平板、電腦都能流暢觀看，一次滿足不同用戶的上網習慣
+          .website__item.col-lg-6.py-5.d-flex.flex-column.flex-sm-row.align-items-center.animatable.fadeInUp
+            .item__icon.d-flex.flex-column.align-items-center.rounded-circle.mb-4.mb-sm-0.mr-sm-5
+              img(src='/service/website-seo.svg')
+              h3.mb-0 SEO優化
+            p.mb-0.mt-3.mt-sm-0 結構好的網站才能帶來流量，內建SEO技術為你的內容行銷加分
+          .website__item.col-lg-6.py-5.d-flex.flex-column.flex-sm-row.align-items-center.animatable.fadeInUp
+            .item__icon.d-flex.flex-column.align-items-center.rounded-circle.mb-4.mb-sm-0.mr-sm-5
+              img(src='/service/website-backend.svg')
+              h3.mb-0 輕鬆管理後台
+            p.mb-0.mt-3.mt-sm-0 簡潔的後台設計，讓你輕鬆編輯與修改資料
+          .website__item.col-lg-6.py-5.d-flex.flex-column.flex-sm-row.align-items-center.animatable.fadeInUp
+            .item__icon.d-flex.flex-column.align-items-center.rounded-circle.mb-4.mb-sm-0.mr-sm-5
+              img(src='/service/website-design.svg')
+              h3.mb-0 客製化介面
+            p.mb-0.mt-3.mt-sm-0 精美細緻的介面設計，更能展現你的品牌形象
+        a.btn.btn-outline-secondary.mt-5(href='#contact') 聯繫了解
+    #design.service__design.pt-5
+      .container.p-4
+        .d-flex.justify-content-center.mb-5
+          h2.h2.mb-0.font-weight-bold.service__title__hightlight 平面設計
+        .row 
+          .design__item.col-lg-6.py-5
+            a.d-flex.justify-content-center.align-items-end.mx-auto.animatable.bounceInLeft(href='#contact')
+              img(src='/service/design-logo.jpg')
+              h3.mb-0 LOGO設計
+              .item__info.d-flex.justify-content-center.align-items-center
+                span 聯繫了解
+          .design__item.col-lg-6.py-5
+            a.d-flex.justify-content-center.align-items-end.mx-auto.animatable.bounceInRight(href='#contact')
+              img(src='/service/design-card.jpg')
+              h3.mb-0 名片設計
+              .item__info.d-flex.justify-content-center.align-items-center
+                span 聯繫了解
+          .design__item.col-lg-6.py-5
+            a.d-flex.justify-content-center.align-items-end.mx-auto.animatable.bounceInLeft(href='#contact')
+              img(src='/service/design-brochure.jpg')
+              h3.mb-0 DM型錄設計
+              .item__info.d-flex.justify-content-center.align-items-center
+                span 聯繫了解
+          .design__item.col-lg-6.py-5
+            a.d-flex.justify-content-center.align-items-end.mx-auto.animatable.bounceInRight(href='#contact')
+              img(src='/service/design-poster.jpg')
+              h3.mb-0 海報設計
+              .item__info.d-flex.justify-content-center.align-items-center
+                span 聯繫了解
+    #advertise.service__advertise.pt-5
+      .container.p-4.d-flex.flex-column.align-items-center
+        .d-flex.justify-content-center.mb-5
+          h2.h2.mb-0.font-weight-bold.service__title__hightlight 廣告投放
+        .advertise__item.py-5.d-flex.flex-column.align-items-center.flex-sm-row.justify-content-sm-between.animatable.bounceIn
+          .order-1.order-sm-0
+            h3.h5.text-center.text-sm-left 客製化廣告受眾，精準投放廣告
+            p.mb-0 透過機器學習技術，分析潛在客戶行為，滾動式調整廣告受眾，達到最好的廣告效益
+          img.order-0.order-sm-1.mb-4.mb-sm-0.ml-sm-4(src='/service/advertise-target.svg')
+        .advertise__item.py-5.d-flex.flex-column.align-items-center.flex-sm-row.justify-content-sm-between.animatable.bounceIn
+          .order-1.order-sm-0
+            h3.h5.text-center.text-sm-left 統合的數據報表，一手掌握成效
+            p.mb-0 不需要了解艱澀的名詞，也不需要操作繁瑣的系統，就可以掌握廣告投放的成效
+          img.order-0.order-sm-1.mb-4.mb-sm-0.ml-sm-4(src='/service/advertise-report.svg')
+        .advertise__item.py-5.d-flex.flex-column.align-items-center.flex-sm-row.justify-content-sm-between.animatable.bounceIn
+          .order-1.order-sm-0
+            h3.h5.text-center.text-sm-left 單一窗口，完成綜合性廣告投放
+            p.mb-0 協助分配預算在每個廣告平台的最佳成效上，不論是 Google 關鍵字，或是 Facebook、Dcard
+          img.order-0.order-sm-1.mb-4.mb-sm-0.ml-sm-4(src='/service/advertise-diversity.svg')
+        a.btn.btn-outline-secondary.mt-5(href='#contact') 聯繫了解
+    #contact.service__contact.py-5
+      .container.p-4
+        .d-flex.justify-content-center.mb-5
+          h3.h2.mb-0.font-weight-bold.service__title__hightlight 和我討論你的需求
+        .row
+          .col-lg-6.mb-3.mb-lg-0
+            a.d-flex.align-items-center.mb-3.mx-1(href='tel:+886975110184')
+              img.mr-3(src='/service/contact-phone.svg')
+              span 0975-110-184
+            a.d-flex.align-items-center.mb-3.mx-1(href='mailto:lefthanded.gen@gmail.com')
+              img.mr-3(src='/service/contact-email.svg')
+              span lefthanded.gen@gmail.com
+            a.d-flex.align-items-center.mb-3.mx-1(href='https://line.me/ti/p/doWod14l-C' target='_blank' rel='noreferrer noopener')
+              img.mr-3(src='/service/contact-line.svg')
+              span raisondetrehyy
+          .col-lg-6
+            span#contacted.h5.mb-0.d-none 謝謝你的來信～我將會盡快與你聯絡
+            span#contactError.h5.mb-0.d-none 哎呀！系統出錯了，請回報這個問題，謝謝你
+            form#contact__form(action='/contact' method='POST' autocomplete='off')
+              .form-row
+                .col-sm-5
+                  .form-group
+                    input#contact__name.form-control(type='text' name='name' placeholder='如何稱呼' spellcheck='false' onkeydown="return event.key != 'Enter';")
+                    .messages
+                .col-sm-7
+                  .form-group
+                    input#contact__email.form-control(type='email' name='email' placeholder='輸入信箱' spellcheck='false' onkeydown="return event.key != 'Enter';")
+                    .messages
+              .form-group 
+                textarea#contact__description.form-control(type='text' name='description' placeholder='請留下你的訊息，我將會盡快與你聯絡' spellcheck='false')
+                .messages
+              .d-flex
+                button.btn.btn-secondary.d-flex.align-items-center.mx-auto.mr-lg-0(type='submit')
+                  span.btn__icon.icon__submit--white
+                  span.ml-2 送出表單

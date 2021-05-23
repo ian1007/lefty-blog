@@ -12,13 +12,13 @@ block content
     .container.py-5
       -for(let categoryDoc in categories)
         .categories__category(id=categories[categoryDoc].id)
-          a.d-flex.flex-column.align-items-center.p-4.hover--shadow.rounded-sm(href='/admin/categories/'+categories[categoryDoc].path)
+          a.d-flex.flex-column.align-items-center.p-4.rounded-sm(href='/admin/categories/'+categories[categoryDoc].path)
             img.categories__icon.rounded-circle.mb-3.lazyload(data-src=categories[categoryDoc].thumbnail||blogger.othersThumbnail alt=categories[categoryDoc].name)
             h1.categories__name.h5=categories[categoryDoc].name
             p.categories__description.text-center.text-muted.mb-0=categories[categoryDoc].description
           button.btn__more.icon__more--gray(type='button' data-toggle='popover' data-placement='left' data-id=categories[categoryDoc].id data-path=categories[categoryDoc].path)
       .categories__category
-        a.d-flex.flex-column.align-items-center.p-4.hover--shadow.rounded-sm(href='/admin/categories/others')
+        a.d-flex.flex-column.align-items-center.p-4.rounded-sm(href='/admin/categories/others')
           img.categories__icon.rounded-circle.mb-3.lazyload(data-src=blogger.othersThumbnail alt='其他')
           h1.categories__name.h5 其他
           p.categories__description.text-center.text-muted.mb-0 沒有分類的貼文

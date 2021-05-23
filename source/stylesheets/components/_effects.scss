@@ -52,11 +52,110 @@
     overflow: hidden;
   }
 }
-.hover--shadow {
-  transition: $transition-base;
+.animatable {
+  visibility: hidden;
+  animation-play-state: paused;
 }
-@media (hover: hover) and (min-width: 992px) {
-  .hover--shadow:hover {
-    box-shadow: $box-shadow !important;
+.animated {
+  visibility: visible;
+  animation-fill-mode: both;
+  animation-duration: 1s;
+  animation-play-state: running;
+  &.fadeIn {
+    animation-name: fadeIn;
+  }
+  &.fadeInUp {
+    animation-name: fadeInUp;
+  }
+  &.bounceIn {
+    animation-name: bounceIn;
+  }
+  &.bounceInLeft {
+    animation-name: bounceInLeft;
+  }
+  &.bounceInRight {
+    animation-name: bounceInRight;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+
+  70% {
+    transform: scale(0.9);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes bounceInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-2000px);
+  }
+
+  60% {
+    transform: translateX(20px);
+  }
+
+  80% {
+    transform: translateX(-5px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes bounceInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(2000px);
+  }
+
+  60% {
+    transform: translateX(-20px);
+  }
+
+  80% {
+    transform: translateX(5px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
   }
 }

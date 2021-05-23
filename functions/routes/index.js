@@ -170,6 +170,18 @@ router.get('/about-me', (req, res) => {
     moment
   });
 });
+router.get('/service', csrfProtection, (req, res) => {
+  res.set('Cache-Control', 'public, max-age=3600, s-maxage=86400');
+  res.render('service', {
+    blogger,
+    title: '左撇子網路科技' + blogger.titleDash + blogger.author,
+    description: description.service,
+    path: blogger.domain + 'service',
+    featuredImage: blogger.imageUrl,
+    moment,
+    csrfToken: req.csrfToken()
+  });
+});
 router.get('/donate', (req, res) => {
   res.set('Cache-Control', 'public, max-age=3600, s-maxage=86400');
   res.render('donate', {
@@ -231,6 +243,7 @@ router.get('/sitemap.xml', (req, res) => {
         // pipe your entries or directly write them.
         smStream.write({ url: '/', lastmod: currentTime });
         smStream.write({ url: '/about-me', lastmod: currentTime });
+        smStream.write({ url: '/service', lastmod: currentTime });
         smStream.write({ url: '/categories', lastmod: currentTime });
         smStream.write({ url: '/donate', lastmod: currentTime });
 
@@ -607,7 +620,28 @@ router.post('/subscribe', csrfProtection, (req, res) => {
     from: '"左撇子のGen" <lefthanded.gen@gmail.com>',
     to: 'raisondetrehyy@gmail.com',
     subject: '有新的訂閱者 - 左撇子のGen',
-    html: `Name: ${req.body.subscriber} Email: ${req.body.email}`,
+    html: `名字：${req.body.subscriber}<br>信箱：${req.body.email}`,
+  }).then(() => {
+    res.end();
+    return null;
+  }).catch(err => {
+    console.log('電子報傳送失敗', err);
+  });
+});
+router.post('/contact', csrfProtection, (req, res) => {
+  nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+      user: functions.config().nodemailer.user,
+      pass: functions.config().nodemailer.pass,
+    },
+  }).sendMail({
+    from: '"左撇子のGen" <lefthanded.gen@gmail.com>',
+    to: 'raisondetrehyy@gmail.com',
+    subject: '新的訊息 - 左撇子のGen',
+    html: `名字：${req.body.name}<br>信箱：${req.body.email}<br>需求：${req.body.description}`,
   }).then(() => {
     res.end();
     return null;

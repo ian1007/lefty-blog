@@ -13,11 +13,11 @@ block content
   main#categories.container-fluid.container__fixedNavbar--margin
     .container.py-5
       -for(let categoryDoc in categories)
-        a.d-flex.flex-column.align-items-center.p-4.hover--shadow.rounded-sm(href='/categories/'+categories[categoryDoc].path)
+        a.d-flex.flex-column.align-items-center.p-4.rounded-sm(href='/categories/'+categories[categoryDoc].path)
           img.categories__icon.rounded-circle.mb-3.lazyload(data-src=categories[categoryDoc].thumbnail||blogger.othersThumbnail alt=categories[categoryDoc].name)
           h1.categories__name.h5=categories[categoryDoc].name
           p.categories__description.text-center.text-muted.mb-0=categories[categoryDoc].description
-      a.d-flex.flex-column.align-items-center.p-4.hover--shadow.rounded-sm(href='/categories/others')
+      a.d-flex.flex-column.align-items-center.p-4.rounded-sm(href='/categories/others')
         img.categories__icon.rounded-circle.mb-3.lazyload(data-src=blogger.othersThumbnail alt='其他')
         h1.categories__name.h5 其他
         p.categories__description.text-center.text-muted.mb-0 沒有分類的貼文

@@ -18,7 +18,7 @@ import minimist from 'minimist';
 import purgecss from 'gulp-purgecss';
 
 // 清除 cache，每次有更動靜態檔案時，要填上日期
-const date = 20210521;
+const date = 20210523;
 
 const paths = {
   css: {
