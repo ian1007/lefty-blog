@@ -8,7 +8,7 @@ $(function () {
     const viewportTop = $(window).scrollTop();
     const viewportBottom = viewportTop + $(window).height();
 
-    return (elementBottom - 30) > viewportTop && (elementTop + 30) < viewportBottom;
+    return (elementBottom - 60) > viewportTop && (elementTop + 30) < viewportBottom;
   };
   $(window).on('resize scroll', function () {
     const animatables = $('.animatable, .animated');
