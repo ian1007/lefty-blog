@@ -1,0 +1,85 @@
+extends _layout.pug
+
+block sharing
+  meta(property='og:type' content='website')
+
+block head
+  script(type='application/ld+json').
+    [{"@context":"https://schema.org","@type":"WebSite","url":"#{blogger.domain}","potentialAction":{"@type":"SearchAction","target":"#{blogger.domain}search?query={search_term_string}","query-input":"required name=search_term_string"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"#{blogger.domain}","name":"#{blogger.author}"}},{"@type":"ListItem","position":2,"item":{"@id":"#{path}","name":"How家庭"}}]},{"@context":"https://schema.org","@type":"Organization","url":"#{blogger.domain}","logo":"#{blogger.domain}organization.png"}]
+
+block pre_scripts
+
+block content
+  main#howfamily.container-fluid.container__fixedNavbar--margin
+    #parallaxScrolling.howfamily__intro.pt-5.pb-3.pb-lg-5
+      .container.p-4.d-flex.flex-column.align-items-center.flex-lg-row
+        .intro__image.mb-4.mb-lg-0.ml-lg-6.mr-lg-5
+          picture.ratio-box(style='padding-bottom: 100%;')
+            source(data-srcset='/howfamily/How家庭_20210524.webp' type='image/webp')
+            img.shadow.lazyload(data-src='/howfamily/How家庭_20210524.png' alt='How家庭')
+        .intro__content.d-flex.flex-column.align-items-center.align-items-lg-start
+          img.lazyload.mb-3(data-src='/howfamily/howfamily.svg' alt='How家庭')
+          p.mr-lg-5.d-none.d-lg-block 我一向喜歡精美的事物，這反應到了我的作品上 : )
+          p.mr-lg-5.mb-0.d-none.d-lg-block 我也了解網頁設計的目的不僅僅是為了形象，更重要的是讓客戶看到，並轉換成實際的價值！所以我也提供廣告行銷的服務。當然，平面設計也能讓你的品牌更上一層樓！
+    .howfamily__podcast.py-5
+      .container.p-4.d-flex.flex-column.align-items-center
+        .d-flex.justify-content-center.mb-4
+          h2.h2.mb-0.font-weight-bold.howfamily__title__hightlight 收聽管道
+        p.text-center.pt-4 你可以在 Apple Podcast、Spotify 等平台上收聽節目。
+        p.text-center 節目會於每週一更新，歡迎訂閱～並分享給你的朋友吧！
+        .d-flex.flex-wrap.justify-content-center
+          a.podcast__channel.d-flex.align-items-center.justify-content-center.mx-5.my-3.mb-lg-0.shadow(href='#')
+            img.mr-3(src='/howfamily/podcast-apple.svg')
+            span.h2.mb-0.font-weight-bold Podcast
+          a.podcast__channel.d-flex.align-items-center.justify-content-center.mx-5.mt-3.shadow(href='#')
+            img.mr-3(src='/howfamily/podcast-spotify.svg')
+            span.h2.mb-0.font-weight-bold Spotify
+    .howfamily__calltoaction.py-5
+      .container.p-4.d-flex.flex-column.align-items-center
+        h2.h3.mb-0.font-weight-bold 喜歡 How家庭 嗎～
+        p.text-center.pt-4 如果 How家庭 有帶給你一點幫助，歡迎你到 Apple Podcast 評分留言～
+        p.text-center.mb-4 並且分享給你的家人、朋友，讓 How家庭 持續提供好的內容！
+        a.btn.btn-howfamily.d-flex.align-items-center(href='#')
+          span.mr-2 馬上評分
+          img(src='/howfamily/star.svg')
+    .howfamily__posts.py-5
+      .container.py-4.d-flex.flex-column.align-items-center
+        .d-flex.justify-content-center.mb-4
+          h2.h2.mb-0.font-weight-bold.howfamily__title__hightlight 最新相關文章
+        -for(var publicDoc in postsPublic)
+          article(class=(postsPublic[publicDoc].featuredImage!=='')?'preview__article':'preview__article--noimage')
+            .preview__category.d-flex.align-items-center
+              img.rounded-circle.lazyload(data-src=blogger.othersThumbnail alt='How家庭')
+              p.mb-0.ml-2.text-muted How家庭
+            a.preview__title.stretched-link(href='/others/'+postsPublic[publicDoc].path) 
+              h3.font-wight-bold.mb-0=postsPublic[publicDoc].title
+            if postsPublic[publicDoc].description!==''
+              p.preview__description.mb-0=postsPublic[publicDoc].description
+            else if postsPublic[publicDoc].descriptionDefault !== ''
+              p.preview__description.mb-0=postsPublic[publicDoc].descriptionDefault
+            if postsPublic[publicDoc].featuredImage!==''
+              img.preview__image.rounded-lg.lazyload(data-src=postsPublic[publicDoc].featuredImage alt=postsPublic[publicDoc].title style='object-fit:cover;')
+    .howfamily__subscribe.py-5
+      .container.p-4.d-flex.flex-column.align-items-center
+        h2.h3.mb-0.font-weight-bold 訂閱電子報
+        .subscribe__description.d-flex.flex-column.pt-4
+          p.mb-2 哈囉！喜歡 How家庭 的內容嗎？訂閱後，你將可以收到：
+          ul.mb-0
+            li.py-1.my-1 ✔︎ How家庭 最新內容
+            li.py-1.my-1 ✔︎ 線下活動資訊
+          span#subscribed.h6.text-center.my-5.d-none 恭喜你，訂閱成功囉
+          span#subscribeError.h6.text-center.my-5.d-none 哎呀！系統出錯了，請回報這個問題，謝謝你
+          form#subscribe.mt-3(action='/subscribe' method='POST' autocomplete='off')
+            .form-row
+              .col-sm-5 
+                .form-group
+                  input#subscriber.form-control(type='text' name='subscriber' placeholder='你的名字' spellcheck='false' onkeydown="return event.key != 'Enter';")
+                  .messages
+              .col-sm-7
+                .form-group
+                  input#email.form-control(type='email' name='email' placeholder='你的信箱' spellcheck='false' onkeydown="return event.key != 'Enter';")
+                  .messages
+            button.btn.btn-howfamily.ml-auto.d-flex.align-items-center(type='submit')
+              span.btn__icon.icon__submit--white
+              span.ml-2 免費訂閱
+            small.d-block.mt-2 不喜歡時，隨時都能取消訂閱哦

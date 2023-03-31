@@ -80,6 +80,7 @@
       width: fit-content;
     }
   }
+  .sidebar__podcast,
   .sidebar__service,
   .sidebar__categories,
   .sidebar__donate {
@@ -120,6 +121,7 @@
     .sidebar__profile a:hover {
       text-decoration: underline;
     }
+    .sidebar__podcast,
     .sidebar__service,
     .sidebar__categories,
     .sidebar__donate {

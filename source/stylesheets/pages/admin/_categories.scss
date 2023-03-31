@@ -3,6 +3,7 @@
     a {
       user-select: none;
       color: $body-color;
+      transition: $transition-base;
       .categories__icon {
         display: block;
         @include icon-size($icon--size--xl, $icon--size--xl, $icon--size--xl, $icon--size--xl);
@@ -25,5 +26,10 @@
       right: 1rem;
       transform: translateY(-50%);
     }
+  }
+}
+@media (hover: hover) and (min-width: 992px) {
+  #categories a:hover {
+    box-shadow: $box-shadow !important;
   }
 }

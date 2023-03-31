@@ -5,7 +5,7 @@
 // 2. 監聽每個需要被驗證的欄位，在輸入後點擊欄外或是跳到下一個欄位等等之離開該欄位之行為，即會偵測一次錯誤
 
 $(function () {
-  if (document.body.contains(document.querySelector('.sidebar__subscribe'))) {
+  if (document.body.contains(document.querySelector('form#subscribe'))) {
     (function () {
       const constraints = {
         'subscriber': { // 訂閱的人
@@ -30,7 +30,7 @@ $(function () {
 
       let allpass = true;
       const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-      const submitButton = document.querySelector('.sidebar__subscribe button');
+      const submitButton = document.querySelector('form#subscribe button');
       // validate
       // 1. 防止表單在驗證之前傳送
       const form = document.querySelector('form#subscribe');
@@ -40,8 +40,8 @@ $(function () {
         allpass = true;
         handleFormSubmit(form);
         if (allpass) {
-          $('.sidebar__subscribe .btn__icon').remove();
-          $('.sidebar__subscribe button').prepend('<div class="sk-chase"><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div></div>');
+          $('form#subscribe .btn__icon').remove();
+          $('form#subscribe button').prepend('<div class="sk-chase"><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div></div>');
           const subscriber = $('#subscriber').val();
           const email = $('#email').val();
           $.ajax({
@@ -68,7 +68,7 @@ $(function () {
       });
 
       // 2. 監聽 input 值改變的狀況
-      const inputs = document.querySelectorAll('.sidebar__subscribe input');
+      const inputs = document.querySelectorAll('form#subscribe input');
       for (let i = 0; i < inputs.length; ++i) {
         inputs.item(i).addEventListener('change', function (e) {
           const errors = validate(form, constraints) || {}; // 根據 constraints 驗證表單

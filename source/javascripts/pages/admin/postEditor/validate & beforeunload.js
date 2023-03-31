@@ -72,7 +72,7 @@ $(function () {
         }
       });
 
-      const submitButton = document.querySelector('#postEditor button');
+      const submitButton = document.querySelector('#postEditor button[type="submit"]');
       // validate
       // 1. 防止表單在驗證之前傳送
       const form = document.querySelector('form#main-content');
@@ -96,7 +96,7 @@ $(function () {
       // 3. 經由後端驗證是否已存在網址
       function handleOverlapping(input, submit) {
         if (submit) {
-          $('#postEditor button').html('<div class="sk-chase-large"><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div></div>');
+          $('#postEditor button[type="submit"]').html('<div class="sk-chase-large"><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div></div>');
         }
         const id = $('form#main-content').attr('data-id');
         const path = $('#path').val();
@@ -117,7 +117,7 @@ $(function () {
             // 恢復 beforeunload 的提示
             submitting = false;
             if (submit) {
-              $('#postEditor button').html('發佈');
+              $('#postEditor button[type="submit"]').html('發佈');
               submitButton.disabled = false;
             }
           } else if (res === '沒有重複') {
@@ -143,7 +143,7 @@ $(function () {
                 });
                 // 恢復 beforeunload 的提示
                 submitting = false;
-                $('#postEditor button').html('發佈');
+                $('#postEditor button[type="submit"]').html('發佈');
                 submitButton.disabled = false;
               }
               else {

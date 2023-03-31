@@ -182,6 +182,26 @@ router.get('/service', csrfProtection, (req, res) => {
     csrfToken: req.csrfToken()
   });
 });
+router.get('/howfamily', csrfProtection, (req, res) => {
+  res.set('Cache-Control', 'public, max-age=3600, s-maxage=86400');
+  postsRef.where('status', '==', 'public').where('category', '==', '其他').orderBy('public_time', 'desc').limit(4).get()
+    .then(snapshot => {
+      const posts_public = snapshot.docs.map(doc => doc.data());
+      res.render('howfamily', {
+        blogger,
+        title: 'How家庭' + blogger.titleDash + blogger.author,
+        description: description.howfamily,
+        path: blogger.domain + 'howfamily',
+        featuredImage: blogger.imageUrl,
+        postsPublic: posts_public,
+        moment,
+        csrfToken: req.csrfToken()
+      });
+    })
+    .catch(err => {
+      console.log('讀取貼文失敗', err);
+    });
+});
 router.get('/donate', (req, res) => {
   res.set('Cache-Control', 'public, max-age=3600, s-maxage=86400');
   res.render('donate', {
@@ -244,6 +264,7 @@ router.get('/sitemap.xml', (req, res) => {
         smStream.write({ url: '/', lastmod: currentTime });
         smStream.write({ url: '/about-me', lastmod: currentTime });
         smStream.write({ url: '/service', lastmod: currentTime });
+        smStream.write({ url: '/howfamily', lastmod: currentTime });
         smStream.write({ url: '/categories', lastmod: currentTime });
         smStream.write({ url: '/donate', lastmod: currentTime });
 
