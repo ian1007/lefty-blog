@@ -32,15 +32,9 @@ const paths = {
     include: ['./node_modules/bootstrap/scss'],
     dest: './public/purgecss/'
   },
-  ampCss: {
-    src: './source/stylesheets/amp.scss',
-    include: ['./node_modules/bootstrap/scss'],
-    dest: './public/purgecss/'
-  },
   purgecss: {
     all: `./public/purgecss/all_${date}.css`,
     admin: `./public/purgecss/admin_${date}.css`,
-    amp: `./public/purgecss/amp.css`,
     dest: './public/'
   },
   // 自己寫的 js，需要壓縮等等的處理
@@ -117,9 +111,7 @@ const paths = {
       './source/vendor/algolia_20210508.js',
       './source/robots.txt'
     ],
-    dest: './public/',
-    apikeySrc: './public-key.pem',
-    apikeyDest: './public/.well-known/amphtml/'
+    dest: './public/'
   },
   remove: {
     dest: './public/'
@@ -183,20 +175,6 @@ export function adminCss() {
     .pipe(gulp.dest(paths.adminCss.dest));
 }
 
-// $ gulp ampCss
-export function ampCss() {
-  return gulp
-    .src(paths.ampCss.src)
-    .pipe(plumber())
-    .pipe(concat('amp.scss'))
-    .pipe(sass({
-      includePaths: paths.ampCss.include
-    }).on('error', sass.logError))
-    .pipe(postcss([autoprefixer()]))
-    .pipe(cleancss({level: 2}))
-    .pipe(gulp.dest(paths.ampCss.dest));
-}
-
 // $ gulp purgeCss
 export function purgeCss() {
   return gulp
@@ -221,19 +199,6 @@ export function purgeAdminCss() {
       fontFace: true,
       variables: true,
       safelist: ['cr-vp-circle', '.ck-media__wrapper', 'figcaption']
-    }))
-    .pipe(gulp.dest(paths.purgecss.dest))
-}
-
-// $ gulp purgeAmpCss
-export function purgeAmpCss() {
-  return gulp
-    .src(paths.purgecss.amp)
-    .pipe(plumber())
-    .pipe(purgecss({
-      content: ['./functions/views/amp/**/*.pug', './public/algolia.js'],
-      fontFace: true,
-      variables: true
     }))
     .pipe(gulp.dest(paths.purgecss.dest))
 }
@@ -314,27 +279,19 @@ export function copy() {
     .pipe(gulp.dest(paths.copy.dest));
 }
 
-// $ gulp copyApikey
-export function copyApikey() {
-  return gulp
-    .src(paths.copy.apikeySrc)
-    .pipe(concat('apikey.pub'))
-    .pipe(gulp.dest(paths.copy.apikeyDest));
-}
-
 // $ gulp clean
 export const clean = () => del(paths.remove.dest);
 
 // $ gulp watch
 function watchFiles() {
-  gulp.watch(paths.watch.css, gulp.series(css, adminCss, purgeCss, purgeAdminCss, ampCss, purgeAmpCss));
+  gulp.watch(paths.watch.css, gulp.series(css, adminCss, purgeCss, purgeAdminCss));
   gulp.watch(paths.watch.js, gulp.series(js, adminJs));
   gulp.watch(paths.watch.vendor, gulp.series(vendorJs, adminVendorJs));
 }
 export { watchFiles as watch };
 
 // $ gulp build
-export const build = gulp.series(css, adminCss, ampCss, js, adminJs, vendorJs, adminVendorJs, svg, copy, copyApikey, purgeCss, purgeAdminCss, purgeAmpCss, cleanCss);
+export const build = gulp.series(css, adminCss, js, adminJs, vendorJs, adminVendorJs, svg, copy, purgeCss, purgeAdminCss, cleanCss);
 
 // $ gulp prod
 export const prod = gulp.series(clean, build);

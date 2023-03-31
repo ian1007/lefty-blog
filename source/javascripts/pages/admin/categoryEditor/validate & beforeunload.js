@@ -41,7 +41,7 @@ $(function(){
             message: '格式不正確，請重新輸入！',
           },
           exclusion: {
-            within: { admin: 'admin', auth: 'auth', amp: 'amp', create: 'create', category: 'category', categories: 'categories', post: 'post', tags: 'tags', others: 'others', typeahead: 'typeahead' },
+            within: { admin: 'admin', auth: 'auth', create: 'create', category: 'category', categories: 'categories', post: 'post', tags: 'tags', others: 'others', typeahead: 'typeahead' },
             message: '不能使用 %{value} 作為網址！',
           },
         },

@@ -48,15 +48,6 @@
             "value": "*"
           }
         ]
-      },
-      {
-        "source": "/.well-known/amphtml/apikey.pub",
-        "headers": [
-          {
-            "key": "Content-Type",
-            "value": "text/plain"
-          }
-        ]
       }
     ],
     "cleanUrls": true,

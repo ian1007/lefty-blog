@@ -289,7 +289,6 @@ router.get('/sitemap.xml', (req, res) => {
             updateTime = moment(snapshotChild.data().update_time * 1000).format();
           }
           smStream.write({ url: `/${categoryPath}/${snapshotChild.data().path}`, lastmod: updateTime });
-          smStream.write({ url: `/amp/${categoryPath}/${snapshotChild.data().path}`, lastmod: updateTime });
         });
 
         // cache the response
@@ -549,7 +548,6 @@ router.get('/:categoryPath/:postPath', csrfProtection, (req, res, next) => {
                 title: post.title + blogger.titleDash + blogger.author,
                 description,
                 path: blogger.domain + categoryPath + '/' + postPath,
-                ampPath: blogger.domain + 'amp/' + categoryPath + '/' + postPath,
                 featuredImage: post.featuredImage,
                 post,
                 postPrev,
@@ -597,7 +595,6 @@ router.get('/:categoryPath/:postPath', csrfProtection, (req, res, next) => {
                 title: post.title + blogger.titleDash + blogger.author,
                 description,
                 path: blogger.domain + categoryPath + '/' + postPath,
-                ampPath: blogger.domain + 'amp/' + categoryPath + '/' + postPath,
                 featuredImage: post.featuredImage,
                 post,
                 postPrev,

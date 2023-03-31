@@ -16,7 +16,6 @@ const auth = firebaseAdmin.auth;
 const indexRouter = require('./routes/index');
 const adminRouter = require('./routes/admin');
 const authRouter = require('./routes/auth');
-const ampRouter = require('./routes/amp');
 
 // for 404 & error
 const moment = require('moment');
@@ -52,7 +51,6 @@ const authCheck = (req, res, next) => {
 }
 
 // routes 資料夾下有幾個檔案，這裡就宣告幾個。左邊是路徑的前綴，一般訪客的前綴為 '/'，管理者則是 '/admin'
-app.use('/amp', ampRouter);
 app.use('/auth', authRouter);
 app.use('/admin', authCheck, adminRouter);
 app.use('/', indexRouter);

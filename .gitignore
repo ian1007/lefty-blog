@@ -1,11 +1,5 @@
 public/
 .runtimeconfig.json
-# AMP Update
-private-key.pem
-public-key.pem
-signature.bin
-url.txt
-base64.txt
 
 # 以下是 firebase init hosting 時的設定
 # Logs

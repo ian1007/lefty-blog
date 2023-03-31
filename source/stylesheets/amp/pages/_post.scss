@@ -85,20 +85,6 @@
     width: 100%;
     height: 0;
     padding-bottom: 75%;
-    amp-img {
-      display: block;
-      margin: 0 auto;
-      min-width: $html--min--width;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: lighten($primary, 40%);
-      &.contain img {
-        object-fit: contain;
-      }
-    }
     & > figcaption {
       color: var(--neutral-light);
       background-color: var(--neutral-lighter-bg);
